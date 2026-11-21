@@ -58,3 +58,11 @@ Search the project for `TODO`, `todo`, and `data-todo` to find everything that s
 5. Once the certificate is issued, which can take up to an hour, tick **Enforce HTTPS**.
 
 GitHub Pages on a free account needs a public repository. A private repo requires GitHub Pro or higher.
+
+## Updating styles or scripts
+
+Browsers keep the stylesheet and script for about 10 minutes. After changing `styles.css` or `main.js`, bump the `?v=` number on their links in every page (e.g. `?v=2` → `?v=3`) so visitors get the new version immediately:
+
+```sh
+sed -i '' 's/?v=2"/?v=3"/g' *.html trips/*.html
+```
