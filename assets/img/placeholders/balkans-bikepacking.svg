@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f7a5d"/><stop offset="1" stop-color="#e1e9df"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="907" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 133,505 255,574 319,442 463,465 620,527 720,598 814,596 899,656 1011,765 1140,813 1224,829 1373,910 1466,920 1600,920 1600,1000" fill="#26331f" fill-opacity="0.45"/><polygon points="0,1000 0,550 114,514 185,485 297,551 413,594 569,528 710,592 782,690 917,777 1060,866 1182,920 1266,920 1408,920 1532,920 1595,920 1600,920 1600,1000" fill="#26331f" fill-opacity="0.7"/><polygon points="0,1000 0,700 98,676 173,607 319,611 393,630 487,598 572,578 660,517 746,573 895,577 979,624 1041,648 1172,716 1311,736 1418,716 1527,680 1600,764 1600,1000" fill="#26331f" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · BALKANS BIKE BACKPACKING</text>
+</svg>

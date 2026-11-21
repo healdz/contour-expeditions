@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a6f5c"/><stop offset="1" stop-color="#ece6da"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1176" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 62,518 215,590 325,545 476,446 538,555 611,659 686,547 842,502 984,387 1069,408 1179,536 1318,449 1416,426 1535,411 1600,347 1600,1000" fill="#332d22" fill-opacity="0.45"/><polygon points="0,1000 0,550 83,628 148,542 284,603 359,674 451,688 554,779 658,806 787,741 859,642 1004,633 1134,628 1210,718 1289,649 1415,580 1543,554 1600,546 1600,1000" fill="#332d22" fill-opacity="0.7"/><polygon points="0,1000 0,700 87,721 157,647 226,565 375,522 444,517 575,554 715,609 836,615 988,604 1051,661 1199,581 1351,638 1477,660 1600,700 1600,1000" fill="#332d22" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · OUR TEAM IN THE FIELD</text>
+</svg>

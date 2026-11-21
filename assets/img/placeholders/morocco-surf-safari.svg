@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b88b5e"/><stop offset="1" stop-color="#f4e5cf"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1061" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 139,355 244,433 398,474 525,349 644,422 735,461 815,359 935,457 1043,468 1176,402 1329,327 1424,243 1582,214 1600,292 1600,1000" fill="#4a3524" fill-opacity="0.45"/><polygon points="0,1000 0,550 77,575 193,495 253,597 313,534 400,633 481,714 578,674 663,682 809,709 892,805 1040,739 1149,696 1255,677 1333,626 1435,583 1572,602 1600,640 1600,1000" fill="#4a3524" fill-opacity="0.7"/><polygon points="0,1000 0,700 103,627 208,681 329,714 412,710 562,656 654,736 716,811 821,869 883,878 996,855 1130,912 1247,836 1330,857 1415,793 1506,865 1600,839 1600,1000" fill="#4a3524" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · MOROCCAN SURF SAFARI</text>
+</svg>

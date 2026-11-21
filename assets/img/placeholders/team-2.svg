@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8f9a8a"/><stop offset="1" stop-color="#e8ece5"/></linearGradient></defs>
+<rect width="1600" height="1600" fill="url(#g)"/>
+<circle cx="1133" cy="352" r="112" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1600 0,672 150,874 271,670 398,805 465,997 558,1126 642,1256 765,1199 882,1300 978,1381 1133,1367 1284,1361 1361,1226 1467,1222 1536,1132 1600,1266 1600,1600" fill="#3c4537" fill-opacity="0.45"/><polygon points="0,1600 0,880 82,756 152,596 306,534 458,424 613,380 761,398 898,313 1015,287 1094,422 1216,319 1307,240 1439,375 1526,543 1600,463 1600,1600" fill="#3c4537" fill-opacity="0.7"/><polygon points="0,1600 0,1120 76,1144 234,1179 339,1192 456,1202 543,1243 633,1277 740,1248 885,1217 1029,1275 1109,1300 1262,1259 1389,1142 1461,1214 1600,1272 1600,1600" fill="#3c4537" fill-opacity="1"/>
+<text x="1560" y="1564" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · EXPEDITION LEAD</text>
+</svg>

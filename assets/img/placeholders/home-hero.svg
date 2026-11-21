@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f5d6a"/><stop offset="1" stop-color="#d6dde3"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1236" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 78,409 236,323 346,385 461,386 535,395 605,458 698,338 840,456 942,385 1100,514 1182,419 1286,385 1398,507 1484,481 1600,496 1600,1000" fill="#222a31" fill-opacity="0.45"/><polygon points="0,1000 0,550 108,477 251,507 334,400 444,324 576,251 657,324 802,268 919,332 1028,252 1158,307 1224,331 1375,356 1499,403 1600,422 1600,1000" fill="#222a31" fill-opacity="0.7"/><polygon points="0,1000 0,700 127,731 256,790 362,874 473,918 545,920 688,909 778,920 928,920 1086,920 1209,920 1301,861 1447,875 1548,819 1600,781 1600,1000" fill="#222a31" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · EXPEDITION HERO</text>
+</svg>

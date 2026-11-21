@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a5d58"/><stop offset="1" stop-color="#e8ddd6"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1335" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 134,512 263,624 382,504 506,429 594,539 716,590 803,545 919,431 1003,342 1119,413 1225,332 1385,286 1526,363 1600,286 1600,1000" fill="#2e2522" fill-opacity="0.45"/><polygon points="0,1000 0,550 115,543 202,459 341,498 486,575 580,553 688,494 757,474 902,456 1021,395 1093,361 1155,333 1261,227 1393,296 1457,282 1552,188 1600,167 1600,1000" fill="#2e2522" fill-opacity="0.7"/><polygon points="0,1000 0,700 153,755 296,767 377,766 502,735 585,767 732,830 802,757 935,731 1084,794 1159,823 1297,869 1415,919 1492,920 1577,920 1600,911 1600,1000" fill="#2e2522" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · GUIDED TRIPS</text>
+</svg>

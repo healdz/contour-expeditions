@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c8c96"/><stop offset="1" stop-color="#e6ebee"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1047" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 90,368 242,341 321,232 383,206 480,286 637,169 763,179 858,253 931,190 994,277 1087,356 1171,268 1268,301 1421,423 1528,314 1600,271 1600,1000" fill="#323b42" fill-opacity="0.45"/><polygon points="0,1000 0,550 109,551 191,497 286,408 416,482 476,570 609,614 708,689 833,623 947,645 1062,634 1151,592 1216,502 1335,529 1430,533 1572,527 1600,450 1600,1000" fill="#323b42" fill-opacity="0.7"/><polygon points="0,1000 0,700 146,649 258,718 399,741 494,687 609,729 710,752 795,819 867,876 1017,831 1174,845 1264,781 1346,746 1409,669 1558,599 1600,639 1600,1000" fill="#323b42" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · DOLOMITES HUT TO HUT</text>
+</svg>

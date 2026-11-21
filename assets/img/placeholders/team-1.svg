@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b97a1"/><stop offset="1" stop-color="#e6eaed"/></linearGradient></defs>
+<rect width="1600" height="1600" fill="url(#g)"/>
+<circle cx="1131" cy="352" r="112" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1600 0,672 135,608 208,799 307,809 440,739 520,887 601,993 679,824 789,761 870,908 1008,860 1126,859 1272,743 1355,791 1482,967 1549,1148 1600,1335 1600,1600" fill="#3b444b" fill-opacity="0.45"/><polygon points="0,1600 0,880 105,992 262,1051 345,1216 499,1365 627,1472 759,1472 899,1469 1038,1472 1173,1399 1299,1468 1374,1472 1479,1400 1572,1422 1600,1440 1600,1600" fill="#3b444b" fill-opacity="0.7"/><polygon points="0,1600 0,1120 160,1091 265,1216 399,1288 529,1205 596,1235 679,1186 831,1166 990,1189 1071,1231 1140,1284 1209,1245 1308,1182 1398,1223 1504,1200 1574,1298 1600,1410 1600,1600" fill="#3b444b" fill-opacity="1"/>
+<text x="1560" y="1564" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · FOUNDER</text>
+</svg>

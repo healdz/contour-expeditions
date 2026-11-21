@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6d7f7a"/><stop offset="1" stop-color="#dfe5e2"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1167" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 67,312 173,401 327,482 426,417 513,445 647,493 762,529 914,624 1039,743 1168,858 1292,797 1356,895 1462,886 1562,920 1600,920 1600,1000" fill="#2f3a36" fill-opacity="0.45"/><polygon points="0,1000 0,550 127,478 209,421 272,351 354,272 479,242 604,280 687,387 804,451 958,456 1115,427 1250,395 1367,322 1523,300 1600,292 1600,1000" fill="#2f3a36" fill-opacity="0.7"/><polygon points="0,1000 0,700 127,658 222,729 346,732 451,759 569,826 688,801 840,872 992,865 1136,818 1237,871 1318,920 1456,881 1577,849 1600,905 1600,1000" fill="#2f3a36" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · MOUNTAINEERING ECUADOR</text>
+</svg>

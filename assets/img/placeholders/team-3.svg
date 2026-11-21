@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9c8f86"/><stop offset="1" stop-color="#efe9e4"/></linearGradient></defs>
+<rect width="1600" height="1600" fill="url(#g)"/>
+<circle cx="1348" cy="352" r="112" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1600 0,672 91,723 249,922 393,891 550,810 627,778 756,885 848,799 912,887 1007,1033 1091,901 1226,772 1305,871 1382,763 1456,584 1536,399 1600,253 1600,1600" fill="#463c35" fill-opacity="0.45"/><polygon points="0,1600 0,880 94,738 188,711 278,563 377,528 474,634 633,477 743,558 896,710 977,618 1109,477 1269,456 1355,559 1501,461 1598,565 1600,663 1600,1600" fill="#463c35" fill-opacity="0.7"/><polygon points="0,1600 0,1120 130,1221 255,1205 315,1173 453,1288 517,1287 626,1371 700,1421 803,1472 864,1400 1019,1455 1158,1397 1266,1366 1411,1331 1557,1444 1600,1472 1600,1600" fill="#463c35" fill-opacity="1"/>
+<text x="1560" y="1564" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · TRIP DESIGNER</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6c6a85"/><stop offset="1" stop-color="#e2e0ec"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="997" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 151,408 303,460 390,510 527,573 670,542 773,641 848,638 924,564 987,444 1060,495 1197,501 1280,566 1433,587 1579,565 1600,606 1600,1000" fill="#2b2a3a" fill-opacity="0.45"/><polygon points="0,1000 0,550 158,621 249,531 334,549 482,574 602,644 753,597 840,653 967,736 1085,743 1235,748 1300,744 1378,664 1503,611 1575,607 1600,519 1600,1000" fill="#2b2a3a" fill-opacity="0.7"/><polygon points="0,1000 0,700 144,734 215,701 360,784 492,829 564,864 661,783 782,800 892,780 1045,770 1200,836 1282,826 1347,797 1444,860 1573,816 1600,836 1600,1000" fill="#2b2a3a" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · CUSTOM EXPEDITION</text>
+</svg>

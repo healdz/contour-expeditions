@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a7a6a"/><stop offset="1" stop-color="#efe6dc"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1098" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 90,444 166,410 303,403 437,289 498,397 618,333 707,252 858,244 988,237 1129,333 1218,368 1344,339 1405,385 1473,295 1600,174 1600,1000" fill="#3a3129" fill-opacity="0.45"/><polygon points="0,1000 0,550 159,449 253,443 405,534 514,580 628,557 761,545 838,627 910,527 1033,466 1179,452 1319,529 1432,530 1541,546 1600,564 1600,1000" fill="#3a3129" fill-opacity="0.7"/><polygon points="0,1000 0,700 134,655 237,686 300,745 437,774 517,808 618,886 751,897 902,920 1043,920 1176,881 1251,808 1392,890 1463,864 1531,849 1600,768 1600,1000" fill="#3a3129" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · DOLOMITES MULTISPORT</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b6f86"/><stop offset="1" stop-color="#c9d3dc"/></linearGradient></defs>
+<rect width="1600" height="1000" fill="url(#g)"/>
+<circle cx="1069" cy="220" r="70" fill="#fff" fill-opacity="0.55"/>
+<polygon points="0,1000 0,420 77,438 234,323 309,322 426,314 534,391 606,387 715,370 872,440 1021,426 1173,505 1308,623 1408,499 1471,539 1532,655 1600,704 1600,1000" fill="#2c3540" fill-opacity="0.45"/><polygon points="0,1000 0,550 114,599 241,539 357,634 487,576 576,614 733,605 830,697 943,770 1074,862 1146,794 1298,871 1373,920 1525,920 1600,920 1600,1000" fill="#2c3540" fill-opacity="0.7"/><polygon points="0,1000 0,700 114,701 259,649 355,664 478,722 602,704 666,701 821,751 934,778 1040,787 1189,833 1343,812 1459,839 1532,886 1600,920 1600,1000" fill="#2c3540" fill-opacity="1"/>
+<text x="1560" y="964" text-anchor="end" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#fff" fill-opacity="0.7">PHOTO PLACEHOLDER · PERUVIAN TREKKING</text>
+</svg>
