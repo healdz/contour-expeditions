@@ -9,7 +9,7 @@
   --slate-light: #7b858e;
   --rule: #d4d8dc;
   --paper: #ffffff;
-  --panel: rgba(255, 255, 255, 0.92);
+  --panel: rgba(255, 255, 255, 0.35);
   --wash: #f3f5f6;
   --accent: #c8553d;
   --accent-dark: #a8432e;
@@ -198,7 +198,7 @@ h2 em, h1 em { font-style: italic; font-weight: 600; }
 /* ---------- Sections ---------- */
 .section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 .section-panel { background: var(--panel); }
-.section-wash { background: rgba(243, 245, 246, 0.93); }
+.section-wash { background: rgba(243, 245, 246, 0.6); }
 .section-head { margin-bottom: 2.5rem; max-width: 720px; }
 .section-head.center { text-align: center; margin-inline: auto; }
 .lead { font-size: 1.15rem; color: var(--slate); }
