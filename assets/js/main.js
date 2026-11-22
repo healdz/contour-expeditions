@@ -59,7 +59,7 @@
     if (a.getAttribute("href") !== "#") return;
     var trip = a.getAttribute("data-trip") || "";
     var base = document.body.getAttribute("data-root") || "";
-    a.setAttribute("href", base + "contact.html?trip=" + encodeURIComponent(trip) + "#contact-form");
+    a.setAttribute("href", base + "contact?trip=" + encodeURIComponent(trip) + "#contact-form");
   });
 
   /* Pre-fill the contact form's trip field from ?trip= */
