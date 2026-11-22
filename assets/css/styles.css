@@ -633,3 +633,9 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .day.in-trip { background: #b9d5c3 !important; color: var(--forest); border-color: #8fb79e; text-decoration: none; }
 .hut-cal-selection { margin: 0.8rem 0 0; padding: 0.6rem 0.8rem; background: var(--wash); border-left: 3px solid var(--forest); font-size: 0.85rem; }
 .dates-table .btn { white-space: nowrap; }
+
+/* Booking page: compact "how booking works" steps */
+.steps.steps-compact { grid-template-columns: 1fr; text-align: left; gap: 1.25rem; margin-bottom: 1.5rem; }
+.steps.steps-compact::before { top: 0; bottom: 0; left: 22px; right: auto; border-top: 0; border-left: 2px dashed var(--accent); }
+.steps.steps-compact li { display: grid; grid-template-columns: 46px 1fr; gap: 0 1rem; text-align: left; }
+.steps.steps-compact .pin { margin: 0; }

@@ -59,7 +59,7 @@
     if (a.getAttribute("href") !== "#") return;
     var trip = a.getAttribute("data-trip") || "";
     var base = document.body.getAttribute("data-root") || "";
-    a.setAttribute("href", base + "contact?trip=" + encodeURIComponent(trip) + "#contact-form");
+    a.setAttribute("href", base + "reserve?trip=" + encodeURIComponent(trip) + "#booking-form");
   });
 
   /* Pre-fill the contact form's trip field from ?trip= */
@@ -236,7 +236,7 @@
         return "<li><strong>Night " + (i + 1) + " · " + fmt(addDays(start, i), { weekday: "short", day: "numeric", month: "short" }) +
           "</strong> " + hut.name + " — " + status + "</li>";
       }).join("");
-      var href = base + "contact?trip=" + encodeURIComponent(trip) + "&start=" + key + "&group=" + groupSize() + "#contact-form";
+      var href = base + "reserve?trip=" + encodeURIComponent(trip) + "&start=" + key + "&group=" + groupSize() + "#booking-form";
       detail.innerHTML = "<h4>" + fmt(start, { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + " — " + labels[st] + "</h4><ul>" + rows + "</ul>" +
         (st === "available" ? '<a class="btn btn-small" href="' + href + '">Reserve this start date →</a>' : "");
     }
