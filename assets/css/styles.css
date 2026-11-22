@@ -519,3 +519,11 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
   background: none;
   box-shadow: none;
 }
+
+/* Heading blocks (label + title + intro) get one continuous halo so lines
+   don't weave through the gaps between them. */
+.section-head, .testimonial {
+  width: fit-content;
+  background: #fff;
+  box-shadow: 0 0 28px 24px #fff;
+}
