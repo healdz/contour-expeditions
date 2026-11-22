@@ -198,7 +198,7 @@ h2 em, h1 em { font-style: italic; font-weight: 600; }
 /* ---------- Sections ---------- */
 .section { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
 .section-panel { background: var(--panel); }
-.section-wash { background: rgba(243, 245, 246, 0.6); }
+.section-wash { background: var(--panel); }
 .section-head { margin-bottom: 2.5rem; max-width: 720px; }
 .section-head.center { text-align: center; margin-inline: auto; }
 .lead { font-size: 1.15rem; color: var(--slate); }
@@ -505,3 +505,17 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 }
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Reading halo: a feathered white backing behind text so the contour lines
+   run right up to the copy without crossing it. */
+:where(.section, .page-intro):not(.cta-band) :where(h1, h2, h3, p, .label, .checklist, .accordion, blockquote, cite, .stats, .dates-foot, .contact-list) {
+  background: #fff;
+  box-shadow: 0 0 14px 12px #fff;
+}
+:is(.section, .page-intro):not(.cta-band) h2 { width: fit-content; }
+.section-head.center h2 { margin-inline: auto; }
+.accordion details { background: #fff; }
+:is(.path-card, .price-box, .trip-card, .numbered .item, .legend, .form, .team-card) :is(h2, h3, p, .label) {
+  background: none;
+  box-shadow: none;
+}
