@@ -219,7 +219,7 @@
         var n = counts[i];
         var status = n === null ? "booking opens soon" : n === -1 ? "closed" : n === 0 ? "full" : n + " bed" + (n === 1 ? "" : "s") + " free";
         return "<li><strong>Night " + (i + 1) + " · " + fmt(addDays(start, i), { weekday: "short", day: "numeric", month: "short" }) +
-          '</strong> <a href="' + hut.url + '" target="_blank" rel="noopener">' + hut.name + "</a> — " + status + "</li>";
+          "</strong> " + hut.name + " — " + status + "</li>";
       }).join("");
       var href = base + "contact?trip=" + encodeURIComponent(trip) + "&start=" + key + "&group=" + groupSize() + "#contact-form";
       detail.innerHTML = "<h4>" + fmt(start, { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + " — " + labels[st] + "</h4><ul>" + rows + "</ul>" +

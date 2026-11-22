@@ -615,7 +615,6 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .hut-cal-detail ul { list-style: none; padding: 0; margin: 0 0 0.8rem; }
 .hut-cal-detail li { padding: 0.2rem 0; font-size: 0.82rem; }
 .hut-cal-detail li strong { display: block; font-family: var(--font-display); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; color: var(--slate-light); }
-.hut-cal-detail li a { color: var(--ink); }
 /* Picker on the reservation form */
 .hut-cal-picker { border-width: 1px; border-color: #b9c0c6; max-width: 420px; }
 .hut-cal-picker[hidden] { display: none; }

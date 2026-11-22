@@ -20,7 +20,6 @@ HUTS = [  # in order of nights
     {"id": 1, "name": "Blüemlisalphütte"},
 ]
 API = "https://www.hut-reservation.org/api/v1/reservation/getHutAvailability?hutId={}"
-BOOK = "https://www.hut-reservation.org/reservation/book-hut/{}/wizard"
 UA = "contour-expeditions.com availability calendar (3 requests every 6 hours)"
 SEASON = (6, 9)  # huts on this route are staffed June through September
 
@@ -68,7 +67,7 @@ def main(out):
     data = {
         "trip": TRIP,
         "updated": datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(),
-        "huts": [{"name": h["name"], "url": BOOK.format(h["id"])} for h in HUTS],
+        "huts": [{"name": h["name"]} for h in HUTS],
         "season": "June through September",
         "days": days,  # start date -> per hut on its night: free beds, null = not open for booking yet, -1 = closed
     }
