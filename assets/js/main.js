@@ -109,6 +109,47 @@
     }
   });
 
+  /* ---------- Photo gallery lightbox ---------- */
+  var galleryItems = Array.prototype.slice.call(document.querySelectorAll(".gallery-item"));
+  if (galleryItems.length) {
+    var box = document.createElement("dialog");
+    box.className = "lightbox";
+    box.setAttribute("aria-label", "Photo viewer");
+    box.innerHTML =
+      '<figure><img alt=""><figcaption></figcaption></figure>' +
+      '<button class="lb-prev" type="button" aria-label="Previous photo">&#8249;</button>' +
+      '<button class="lb-next" type="button" aria-label="Next photo">&#8250;</button>' +
+      '<button class="lb-close" type="button" aria-label="Close">&times;</button>';
+    document.body.appendChild(box);
+    var boxImg = box.querySelector("img");
+    var boxCap = box.querySelector("figcaption");
+    var current = 0;
+
+    function showPhoto(i) {
+      current = (i + galleryItems.length) % galleryItems.length;
+      var thumb = galleryItems[current].querySelector("img");
+      boxImg.src = galleryItems[current].getAttribute("data-full");
+      boxImg.alt = thumb.alt;
+      boxCap.textContent = thumb.alt;
+    }
+
+    galleryItems.forEach(function (item, i) {
+      item.addEventListener("click", function () {
+        showPhoto(i);
+        box.showModal();
+      });
+    });
+    box.querySelector(".lb-prev").addEventListener("click", function () { showPhoto(current - 1); });
+    box.querySelector(".lb-next").addEventListener("click", function () { showPhoto(current + 1); });
+    box.querySelector(".lb-close").addEventListener("click", function () { box.close(); });
+    box.addEventListener("click", function (e) { if (e.target === box) box.close(); });
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") showPhoto(current - 1);
+      if (e.key === "ArrowRight") showPhoto(current + 1);
+    });
+    box.addEventListener("close", function () { galleryItems[current].focus(); });
+  }
+
   /* ---------- Route maps ---------- */
   var maps = document.querySelectorAll(".route-map[data-route]");
   if (maps.length && window.L) {

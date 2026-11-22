@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Oswald:wght@400;500;600&amp;display=swap">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=5">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=6">
 </head>
 <body data-root="../">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -66,9 +66,11 @@
     </section>
 
     <section class="section section-panel">
-      <div class="container">
-        <span class="label">Overview</span>
-        <p class="overview">The Via Alpina crosses Switzerland from east to west, and its Bernese Oberland stages are some of the finest — and toughest — days of walking in the Alps. Starting a short train ride from Interlaken, this self-guided route climbs from the Lauterbrunnen valley past Mürren, then crosses the Sefinenfurgge and the Hohtürli, the highest pass on the trail, with the Eiger, Mönch, and Jungfrau on the horizon. Nights are spent in Swiss Alpine Club huts and a mountain inn, ending at the turquoise Oeschinensee above Kandersteg. It&#x27;s a big objective packed into a long weekend; we book the huts and hand you the route.</p>
+      <div class="container media-split">
+        <div>
+          <span class="label">Overview</span>
+          <p class="overview">The Via Alpina crosses Switzerland from east to west, and its Bernese Oberland stages are some of the finest — and toughest — days of walking in the Alps. Starting a short train ride from Interlaken, this self-guided route climbs from the Lauterbrunnen valley past Mürren, then crosses the Sefinenfurgge and the Hohtürli, the highest pass on the trail, with the Eiger, Mönch, and Jungfrau on the horizon. Nights are spent in Swiss Alpine Club huts and a mountain inn, ending at the turquoise Oeschinensee above Kandersteg. It&#x27;s a big objective packed into a long weekend; we book the huts and hand you the route.</p>
+        </div><figure class="side-photo"><img src="../assets/img/photos/swiss-via-alpina-ridges-sm.jpg" alt="Green ridges and an alpine tarn below the snow-capped Bernese Alps" loading="lazy"></figure>
       </div>
     </section>
 
@@ -115,6 +117,7 @@
       <div class="container">
         <span class="label">Day by Day</span>
         <h2 id="itin-h">Trip <em>Itinerary</em></h2>
+        <div class="media-split media-split-wide">
         <div class="accordion itinerary">
           <details>
             <summary><span class="day">Day 1</span><span class="title">Lauterbrunnen to Rotstockhütte</span><span class="meta">~13 km · +1,300 m</span></summary>
@@ -132,6 +135,7 @@
             <summary><span class="day">Day 4</span><span class="title">Oeschinensee to Kandersteg</span><span class="meta">~10 km · −1,650 m</span></summary>
             <div class="content"><p>Descend past the turquoise Oeschinensee to Kandersteg, then take the train back to Interlaken.</p></div>
           </details>
+        </div><figure class="side-photo"><img src="../assets/img/photos/swiss-via-alpina-snowfield-sm.jpg" alt="Two hikers crossing a wide snowfield between bands of rock" loading="lazy"></figure>
         </div>
       </div>
     </section>
@@ -139,9 +143,11 @@
     <section class="section section-panel" aria-labelledby="inc-h">
       <div class="container">
         <h2 id="inc-h">What's <em>Included</em></h2>
+        <div class="media-split media-split-reverse"><figure class="side-photo"><img src="../assets/img/photos/swiss-via-alpina-hut-sm.jpg" alt="Stone mountain hut with red-and-white shutters beneath a snowy peak" loading="lazy"></figure>
         <div class="grid grid-2">
           <div><h3>Included</h3><ul class="checklist"><li>3 nights pre-booked: Rotstockhütte, Berghaus Griesalp, and Blüemlisalphütte</li><li>Half board at every stop (dinner and breakfast)</li><li>Detailed route notes and GPX files for every stage</li><li>Pre-trip video briefing and conditions check</li><li>Packing list and SAC hut etiquette guide</li><li>24/7 emergency support line while you&#x27;re on trail</li></ul></div>
           <div><h3>Not Included</h3><ul class="checklist excluded"><li>A guide (contact us to add one)</li><li>Train tickets to Lauterbrunnen and from Kandersteg</li><li>Lunches, snacks, and drinks</li><li>Travel insurance with mountain rescue cover</li></ul></div>
+        </div>
         </div>
       </div>
     </section>
@@ -216,6 +222,32 @@
       </div>
     </section>
 
+    <section class="section" id="gallery" aria-labelledby="gallery-h">
+      <div class="container">
+        <div class="section-head"><span class="label">From the Trail</span><h2 id="gallery-h">Photo <em>Gallery</em></h2></div>
+        <div class="gallery">
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina.jpg" aria-label="View larger: Cows grazing on a flower-filled alpine meadow below glaciated Bernese Alps">
+            <img src="../assets/img/photos/swiss-via-alpina.jpg" alt="Cows grazing on a flower-filled alpine meadow below glaciated Bernese Alps" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina-ridges.jpg" aria-label="View larger: Green ridges and an alpine tarn below the snow-capped Bernese Alps">
+            <img src="../assets/img/photos/swiss-via-alpina-ridges-sm.jpg" alt="Green ridges and an alpine tarn below the snow-capped Bernese Alps" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina-hut.jpg" aria-label="View larger: Stone mountain hut with red-and-white shutters beneath a snowy peak">
+            <img src="../assets/img/photos/swiss-via-alpina-hut-sm.jpg" alt="Stone mountain hut with red-and-white shutters beneath a snowy peak" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina-lake.jpg" aria-label="View larger: A lone figure wading at the edge of a turquoise glacial lake">
+            <img src="../assets/img/photos/swiss-via-alpina-lake-sm.jpg" alt="A lone figure wading at the edge of a turquoise glacial lake" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina-snowfield.jpg" aria-label="View larger: Two hikers crossing a wide snowfield between bands of rock">
+            <img src="../assets/img/photos/swiss-via-alpina-snowfield-sm.jpg" alt="Two hikers crossing a wide snowfield between bands of rock" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="../assets/img/photos/swiss-via-alpina-glacier.jpg" aria-label="View larger: Close-up of crevassed glacier ice and seracs">
+            <img src="../assets/img/photos/swiss-via-alpina-glacier-sm.jpg" alt="Close-up of crevassed glacier ice and seracs" loading="lazy">
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section class="section cta-band">
       <div class="container">
         <h2>Ready for Your Next <em>Expedition</em>?</h2>
@@ -263,6 +295,6 @@
     </div>
   </footer>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="../assets/js/main.js?v=5"></script>
+  <script src="../assets/js/main.js?v=6"></script>
 </body>
 </html>
