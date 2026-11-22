@@ -615,13 +615,21 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .hut-cal-detail ul { list-style: none; padding: 0; margin: 0 0 0.8rem; }
 .hut-cal-detail li { padding: 0.2rem 0; font-size: 0.82rem; }
 .hut-cal-detail li strong { display: block; font-family: var(--font-display); font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.68rem; color: var(--slate-light); }
-/* Picker on the reservation form */
-.hut-cal-picker { border-width: 1px; border-color: #b9c0c6; max-width: 420px; }
-.hut-cal-picker[hidden] { display: none; }
-.hut-cal-mode { border: 0; padding: 0; margin: 0.8rem 0 0; display: flex; flex-wrap: wrap; gap: 0.3rem 1.2rem; }
-.hut-cal-mode legend { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; margin-bottom: 0.35rem; padding: 0; }
-.hut-cal-mode label { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; }
-.hut-cal-mode input { accent-color: var(--accent); }
+/* Reservation form: date fields + pop-up calendar */
+.date-fields[hidden] { display: none; }
+.date-fields { display: grid; gap: 0.5rem; }
+.field .date-input {
+  cursor: pointer; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%237b858e' stroke-width='1.6' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E") no-repeat right 0.8rem center;
+  padding-right: 2.6rem;
+}
+.field .date-input:hover { border-color: var(--ink); }
+.date-fields-note { font-size: 0.82rem; color: var(--slate); margin: 0; }
+.date-dialog { border: 0; border-radius: 6px; padding: 0; width: min(400px, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); box-shadow: 0 20px 60px rgba(20, 24, 27, 0.35); }
+.date-dialog::backdrop { background: rgba(20, 24, 27, 0.55); }
+.date-dialog .hut-cal { border: 0; }
+.date-dialog-close { border: 0; background: none; font-size: 1.6rem; line-height: 1; cursor: pointer; color: var(--slate); padding: 0 0.2rem; }
+.date-dialog-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1rem; }
+.date-dialog-actions .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.day.in-trip { background: #b9d5c3 !important; color: var(--forest); border-color: #8fb79e; text-decoration: none; }
 .hut-cal-selection { margin: 0.8rem 0 0; padding: 0.6rem 0.8rem; background: var(--wash); border-left: 3px solid var(--forest); font-size: 0.85rem; }
-
 .dates-table .btn { white-space: nowrap; }

@@ -153,19 +153,22 @@
   /* ---------- Hut availability calendar ----------
      Data file: start date -> per hut on its night: free beds,
      null = not open for booking yet (counts as available), -1 = closed.
-     Trip pages browse dates; the contact form (.hut-cal-picker) picks
-     a start date or a window and writes it into hidden form fields. */
+     Trip pages: browse dates and see each hut's status.
+     Reservation form: a pop-up ("Available Dates") fills the start/end
+     date fields and writes a suggested message. */
+  var fmtLong = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+
   document.querySelectorAll(".hut-cal").forEach(function (cal) {
     var picker = cal.classList.contains("hut-cal-picker");
     var trip = cal.getAttribute("data-trip");
+    var nights = parseInt(cal.getAttribute("data-nights"), 10) || 1;
     var summary = cal.querySelector(".hut-cal-summary");
     var grid = cal.querySelector(".hut-cal-grid");
     var monthLabel = cal.querySelector(".hut-cal-month");
     var detail = cal.querySelector(".hut-cal-detail");
-    var selection = cal.querySelector(".hut-cal-selection");
     var sizeSelect = picker ? document.getElementById("f-group") : cal.querySelector("select");
     var base = document.body.getAttribute("data-root") || "";
-    var data, months = [], monthIdx = 0, chosen = null, windowStart = null, windowEnd = null;
+    var data, months = [], monthIdx = 0, chosen = null;
     var today = new Date(); today.setHours(0, 0, 0, 0);
 
     function iso(d) {
@@ -176,7 +179,7 @@
     function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
     function groupSize() { return parseInt(sizeSelect.value, 10) || 9; }
     function people(n) { return n + (n === 1 ? " person" : " people"); }
-    function mode() { var r = cal.querySelector('input[name="date_type"]:checked'); return r && r.value === "Window of dates" ? "window" : "date"; }
+    function endOf(key) { return iso(addDays(parse(key), nights)); }
 
     function stateOf(key) {
       var counts = data.days[key];
@@ -187,9 +190,13 @@
     }
     var labels = { available: "Available", full: "Fully booked", closed: "Closed", past: "Past" };
 
-    function inWindow(key) { return windowStart && key >= windowStart && key <= (windowEnd || windowStart); }
+    function showMonthOf(key) {
+      var i = months.findIndex(function (m) { return iso(m).slice(0, 7) === key.slice(0, 7); });
+      if (i >= 0) monthIdx = i;
+    }
 
     function render() {
+      if (!data) return;
       var m = months[monthIdx];
       monthLabel.textContent = fmt(m, { month: "long", year: "numeric" });
       cal.querySelector(".hut-cal-prev").disabled = monthIdx === 0;
@@ -199,9 +206,10 @@
       for (var i = 0; i < lead; i++) html += "<span></span>";
       for (var d = new Date(m); d.getMonth() === m.getMonth(); d = addDays(d, 1)) {
         var key = iso(d), st = stateOf(key);
-        var cls = "day " + st + (key === chosen && !(picker && mode() === "window") ? " selected" : "") + (picker && mode() === "window" && inWindow(key) ? " in-window" : "");
+        var inTrip = picker && chosen && key > chosen && key <= endOf(chosen);
+        var cls = "day " + st + (key === chosen ? " selected" : "") + (inTrip ? " in-trip" : "");
         var title = fmt(d, { weekday: "long", day: "numeric", month: "long" }) + ": " + labels[st];
-        var clickable = st === "available" || (picker && mode() === "window" && st !== "past" && st !== "closed") || (!picker && st === "full");
+        var clickable = st === "available" || (!picker && st === "full");
         html += clickable
           ? '<button type="button" class="' + cls + '" data-date="' + key + '" title="' + title + '" aria-label="' + title + '">' + d.getDate() + "</button>"
           : '<span class="' + cls + '" title="' + title + '">' + d.getDate() + "</span>";
@@ -211,6 +219,13 @@
       summary.textContent = count
         ? count + " start dates available for " + people(groupSize()) + "."
         : "No start dates are currently available for " + people(groupSize()) + ". Contact us and we'll check alternatives.";
+      if (picker) {
+        cal.querySelector(".hut-cal-selection").textContent = chosen
+          ? fmt(parse(chosen), { weekday: "short", day: "numeric", month: "short" }) + " → " +
+            fmt(parse(endOf(chosen)), { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + " (" + nights + " nights)"
+          : "Choose an available start date.";
+        cal.querySelector(".date-apply").disabled = !chosen;
+      }
     }
 
     function showDetail(key) {
@@ -226,56 +241,80 @@
         (st === "available" ? '<a class="btn btn-small" href="' + href + '">Reserve this start date →</a>' : "");
     }
 
-    function writeSelection() {
-      var f = function (k) { return fmt(parse(k), { weekday: "short", day: "numeric", month: "short", year: "numeric" }); };
-      cal.querySelector('[name="start_date"]').value = mode() === "date" && chosen ? chosen : "";
-      cal.querySelector('[name="window_start"]').value = mode() === "window" && windowStart ? windowStart : "";
-      cal.querySelector('[name="window_end"]').value = mode() === "window" && windowStart ? (windowEnd || windowStart) : "";
-      if (mode() === "date") {
-        selection.textContent = chosen ? "Selected start date: " + f(chosen) + " (3 nights)." : "Choose an available start date.";
-      } else if (!windowStart) {
-        selection.textContent = "Choose the first and last start dates you could do.";
-      } else if (!windowEnd) {
-        selection.textContent = "Window starts " + f(windowStart) + ". Now choose the last start date.";
-      } else {
-        var n = Object.keys(data.days).filter(function (k) { return k >= windowStart && k <= windowEnd && stateOf(k) === "available"; }).length;
-        selection.textContent = "Window: " + f(windowStart) + " – " + f(windowEnd) + " (" + n + " available start date" + (n === 1 ? "" : "s") + ").";
-      }
-    }
-
     grid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-date]");
       if (!btn) return;
-      var key = btn.getAttribute("data-date");
-      if (!picker) { chosen = key; render(); showDetail(key); return; }
-      if (mode() === "date") {
-        chosen = key;
-      } else if (!windowStart || windowEnd || key < windowStart) {
-        windowStart = key; windowEnd = null;
-      } else {
-        windowEnd = key;
-      }
-      render(); writeSelection();
+      chosen = btn.getAttribute("data-date");
+      render();
+      if (!picker) showDetail(chosen);
     });
     cal.querySelector(".hut-cal-prev").addEventListener("click", function () { monthIdx--; render(); });
     cal.querySelector(".hut-cal-next").addEventListener("click", function () { monthIdx++; render(); });
-    sizeSelect.addEventListener("change", function () {
-      if (chosen && stateOf(chosen) !== "available") chosen = null;
-      if (detail) detail.innerHTML = "";
-      if (data) { render(); if (picker) writeSelection(); }
-    });
-    cal.querySelectorAll('input[name="date_type"]').forEach(function (r) {
-      r.addEventListener("change", function () { render(); writeSelection(); });
-    });
 
-    // On the contact form, show this calendar only while its trip is selected.
-    var tripSelect = document.getElementById("trip-interest");
-    function syncVisibility() {
-      var show = tripSelect.value === trip;
-      cal.hidden = !show;
-      cal.querySelectorAll("input").forEach(function (i) { i.disabled = !show; });
+    /* ----- Reservation form: date fields, pop-up, and suggested message ----- */
+    var fields, dialog, startInput, endInput, msg, tripSelect, committed = null, autoText = "";
+    if (picker) {
+      fields = cal.closest(".date-fields");
+      dialog = cal.closest("dialog");
+      startInput = fields.querySelector('[name="start_date"]');
+      endInput = fields.querySelector('[name="end_date"]');
+      msg = document.getElementById("f-msg");
+      tripSelect = document.getElementById("trip-interest");
+      var short = fields.getAttribute("data-trip-short");
+
+      var writeMessage = function () {
+        if (!msg || (msg.value && msg.value !== autoText)) return; // respect the visitor's own words
+        autoText = "Hi, I'd like to reserve " + short + " for " + people(groupSize()) +
+          " starting on " + (committed ? fmt(parse(committed), fmtLong) : "___") + ".";
+        msg.value = autoText;
+      };
+      var clearMessage = function () {
+        if (msg && msg.value === autoText) msg.value = "";
+        autoText = "";
+      };
+      var commit = function (key) {
+        committed = key;
+        startInput.value = key ? fmt(parse(key), fmtLong) : "";
+        endInput.value = key ? fmt(parse(endOf(key)), fmtLong) : "";
+        writeMessage();
+      };
+      var open = function () {
+        chosen = committed;
+        if (data) { showMonthOf(chosen || Object.keys(data.days).filter(function (k) { return stateOf(k) === "available"; })[0] || ""); render(); }
+        dialog.showModal();
+      };
+      [startInput, endInput].forEach(function (input) {
+        input.addEventListener("click", open);
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") { e.preventDefault(); open(); }
+        });
+      });
+      cal.querySelector(".date-apply").addEventListener("click", function () { commit(chosen); dialog.close(); startInput.focus(); });
+      cal.querySelector(".date-cancel").addEventListener("click", function () { dialog.close(); });
+      cal.querySelector(".date-dialog-close").addEventListener("click", function () { dialog.close(); });
+      dialog.addEventListener("click", function (e) { if (e.target === dialog) dialog.close(); });
+
+      sizeSelect.addEventListener("change", function () {
+        if (fields.hidden) return;
+        writeMessage();
+        render();
+      });
+
+      var syncVisibility = function () {
+        var show = tripSelect.value === trip;
+        fields.hidden = !show;
+        startInput.disabled = endInput.disabled = !show;
+        if (show) writeMessage(); else clearMessage();
+      };
+      tripSelect.addEventListener("change", syncVisibility);
+      syncVisibility();
+    } else {
+      sizeSelect.addEventListener("change", function () {
+        if (chosen && stateOf(chosen) !== "available") chosen = null;
+        detail.innerHTML = "";
+        render();
+      });
     }
-    if (picker && tripSelect) { tripSelect.addEventListener("change", syncVisibility); syncVisibility(); }
 
     fetch(cal.getAttribute("data-src"), { cache: "no-cache" })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -287,18 +326,22 @@
           var ym = k.slice(0, 7);
           if (!seen[ym]) { seen[ym] = true; months.push(parse(ym + "-01")); }
         });
-        var params = new URLSearchParams(window.location.search);
-        if (picker && params.get("trip") === trip && params.get("group")) sizeSelect.value = params.get("group");
-        var want = picker && params.get("trip") === trip && params.get("start");
-        if (want && data.days[want]) chosen = want;
-        var target = chosen || keys.filter(function (k) { return stateOf(k) === "available"; })[0] || keys[0];
-        if (target) monthIdx = Math.max(0, months.findIndex(function (m) { return iso(m).slice(0, 7) === target.slice(0, 7); }));
+        showMonthOf(keys.filter(function (k) { return stateOf(k) === "available"; })[0] || keys[0] || "");
+        if (picker) {
+          var params = new URLSearchParams(window.location.search);
+          if (params.get("trip") === trip) {
+            if (params.get("group")) sizeSelect.value = params.get("group");
+            var want = params.get("start");
+            if (want && data.days[want]) commit(want); else writeMessage();
+          }
+        }
         render();
-        if (picker) writeSelection();
       })
       .catch(function () {
         cal.classList.add("hut-cal-error");
-        summary.textContent = "Hut availability couldn't be loaded right now. Tell us your preferred dates in the message below and we'll check for you.";
+        summary.textContent = picker
+          ? "Hut availability couldn't be loaded right now. Tell us your preferred dates in the message below."
+          : "Hut availability couldn't be loaded right now. Contact us for dates.";
       });
   });
 
