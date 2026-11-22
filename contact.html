@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Oswald:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/styles.css?v=9">
+  <link rel="stylesheet" href="assets/css/styles.css?v=10">
 </head>
 <body data-root="">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -76,6 +76,37 @@
             </div>
             <div class="field"><label for="trip-interest">Trip of interest</label>
               <select id="trip-interest" name="trip"><option value="">General enquiry</option><option value="peru-huayhuash">Peruvian Trekking (Guided)</option><option value="ecuador-mountaineering">Mountaineering Ecuador (Guided)</option><option value="dolomites-multisport">Dolomites Multisport (Guided)</option><option value="dolomites-hut-to-hut">Dolomites Hut to Hut (Unguided)</option><option value="morocco-surf-safari">Moroccan Surf Safari (Unguided)</option><option value="balkans-bikepacking">Balkans Bike Backpacking (Unguided)</option><option value="swiss-via-alpina">Swiss Alps: Via Alpina (Unguided)</option><option value="custom">Custom expedition</option></select></div>
+            <div class="field"><label for="f-group">Group size</label>
+              <select id="f-group" name="group_size"><option value="1">1 person</option><option value="2" selected>2 people</option><option value="3">3 people</option><option value="4">4 people</option><option value="5">5 people</option><option value="6">6 people</option><option value="7">7 people</option><option value="8">8 people</option><option value="9+">9 or more</option></select></div>
+            
+        <div class="hut-cal hut-cal-picker" data-src="https://raw.githubusercontent.com/healdz/contour-expeditions/availability-data/swiss-via-alpina.json" data-trip="swiss-via-alpina" hidden>
+          <div class="hut-cal-head">
+            <h3>Check Hut <em>Availability</em></h3>
+          </div>
+          <p class="hut-cal-note">The huts on this route are open from <strong>June through September</strong>. A start date is available when each hut has beds for your group on consecutive nights.</p>
+          <fieldset class="hut-cal-mode">
+            <legend>I'd like to reserve</legend>
+            <label><input type="radio" name="date_type" value="Specific start date" checked> A specific start date</label>
+            <label><input type="radio" name="date_type" value="Window of dates"> A window of dates</label>
+          </fieldset>
+          <p class="hut-cal-summary" aria-live="polite">Loading hut availability…</p>
+          <div class="hut-cal-nav">
+            <button type="button" class="hut-cal-prev" aria-label="Previous month">‹</button>
+            <span class="hut-cal-month"></span>
+            <button type="button" class="hut-cal-next" aria-label="Next month">›</button>
+          </div>
+          <div class="hut-cal-grid"></div>
+          <ul class="hut-cal-legend">
+            <li><i class="available"></i>Available</li>
+            <li><i class="full"></i>Fully booked</li>
+            <li><i class="closed"></i>Closed</li>
+          </ul>
+          <p class="hut-cal-selection" aria-live="polite">No date selected yet.</p>
+          <input type="hidden" name="start_date">
+          <input type="hidden" name="window_start">
+          <input type="hidden" name="window_end">
+          <noscript><p>Turn on JavaScript to see hut availability.</p></noscript>
+        </div>
             <div class="field"><label for="f-msg">Message <span class="req">*</span></label><textarea id="f-msg" name="message" required></textarea></div>
             <div class="form-status" role="status" tabindex="-1" hidden></div>
             <div><button class="btn" type="submit">Send Message →</button></div>
@@ -133,6 +164,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=9"></script>
+  <script src="assets/js/main.js?v=10"></script>
 </body>
 </html>

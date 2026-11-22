@@ -22,6 +22,11 @@ HUTS = [  # in order of nights
 API = "https://www.hut-reservation.org/api/v1/reservation/getHutAvailability?hutId={}"
 BOOK = "https://www.hut-reservation.org/reservation/book-hut/{}/wizard"
 UA = "contour-expeditions.com availability calendar (3 requests every 6 hours)"
+SEASON = (6, 9)  # huts on this route are staffed June through September
+
+
+def in_season(day):
+    return SEASON[0] <= day.month <= SEASON[1]
 
 
 def fetch(hut_id):
@@ -30,10 +35,15 @@ def fetch(hut_id):
         rows = json.load(r)
     beds = {}
     for row in rows:
-        # number = free beds (0 = full); None = staffed season but reservations not open yet;
-        # -1 = closed or unstaffed (winter room only)
+        # number = free beds (0 = full); None = reservations not open yet; -1 = closed
         day = row["date"][:10]
         beds[day] = row.get("freeBeds") if row.get("hutStatus") == "SERVICED" else -1
+    # A hut that hasn't published a summer season at all shows every day as closed.
+    # Treat those in-season days as "not open for booking yet" rather than closed.
+    published = {d[:4] for d, n in beds.items() if n != -1 and in_season(datetime.date.fromisoformat(d))}
+    for d, n in beds.items():
+        if n == -1 and d[:4] not in published and in_season(datetime.date.fromisoformat(d)):
+            beds[d] = None
     return beds
 
 
@@ -50,20 +60,22 @@ def main(out):
         nights = [(d0 + datetime.timedelta(days=n)).isoformat() for n in range(len(HUTS))]
         if not all(night in beds for night, beds in zip(nights, per_hut)):
             continue
+        if not all(in_season(datetime.date.fromisoformat(n)) for n in nights):
+            continue
         counts = [beds[night] for night, beds in zip(nights, per_hut)]
-        if any(c != -1 for c in counts):  # skip dates where every hut is closed, to keep the file small
-            days[start] = counts
+        days[start] = counts
 
     data = {
         "trip": TRIP,
         "updated": datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat(),
         "huts": [{"name": h["name"], "url": BOOK.format(h["id"])} for h in HUTS],
-        "days": days,  # start date -> per hut on its night: free beds, null = not bookable yet, -1 = closed
+        "season": "June through September",
+        "days": days,  # start date -> per hut on its night: free beds, null = not open for booking yet, -1 = closed
     }
     with open(out, "w") as f:
         json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
-    bookable = sum(1 for c in days.values() if all(isinstance(n, int) and n > 0 for n in c))
-    print(f"wrote {out}: {len(days)} dates with any hut open, {bookable} bookable start dates")
+    bookable = sum(1 for c in days.values() if all(n is None or n > 0 for n in c))
+    print(f"wrote {out}: {len(days)} in-season start dates, {bookable} available")
 
 
 if __name__ == "__main__":

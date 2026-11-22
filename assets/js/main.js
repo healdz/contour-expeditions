@@ -70,15 +70,6 @@
     var match = Array.prototype.find.call(tripField.options, function (o) { return o.value === wanted; });
     if (match) tripField.value = wanted;
   }
-  var msgField = document.getElementById("f-msg");
-  if (msgField && params.get("start") && !msgField.value) {
-    var startDate = new Date(params.get("start") + "T00:00:00");
-    var tripName = tripField && tripField.selectedIndex > 0 ? tripField.options[tripField.selectedIndex].text.replace(/ \(.*\)$/, "") : "the trip";
-    var group = parseInt(params.get("group"), 10);
-    msgField.value = "I'd like to start " + tripName + " on " +
-      startDate.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) +
-      (group ? " with " + group + (group === 1 ? " person" : " people") : "") + ".";
-  }
 
   /* ---------- Forms ---------- */
   document.querySelectorAll("form[data-formspree]").forEach(function (form) {
@@ -160,101 +151,154 @@
   }
 
   /* ---------- Hut availability calendar ----------
-     Data file: start date -> free beds per hut on its night
-     (number of beds, null = reservations not open yet, -1 = closed). */
+     Data file: start date -> per hut on its night: free beds,
+     null = not open for booking yet (counts as available), -1 = closed.
+     Trip pages browse dates; the contact form (.hut-cal-picker) picks
+     a start date or a window and writes it into hidden form fields. */
   document.querySelectorAll(".hut-cal").forEach(function (cal) {
+    var picker = cal.classList.contains("hut-cal-picker");
+    var trip = cal.getAttribute("data-trip");
     var summary = cal.querySelector(".hut-cal-summary");
     var grid = cal.querySelector(".hut-cal-grid");
     var monthLabel = cal.querySelector(".hut-cal-month");
     var detail = cal.querySelector(".hut-cal-detail");
-    var sizeSelect = cal.querySelector("select");
+    var selection = cal.querySelector(".hut-cal-selection");
+    var sizeSelect = picker ? document.getElementById("f-group") : cal.querySelector("select");
     var base = document.body.getAttribute("data-root") || "";
-    var data, months = [], monthIdx = 0;
+    var data, months = [], monthIdx = 0, chosen = null, windowStart = null, windowEnd = null;
     var today = new Date(); today.setHours(0, 0, 0, 0);
 
     function iso(d) {
       return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
     }
+    function parse(key) { return new Date(key + "T00:00:00"); }
     function fmt(d, opts) { return d.toLocaleDateString("en-GB", opts); }
     function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+    function groupSize() { return parseInt(sizeSelect.value, 10) || 9; }
+    function people(n) { return n + (n === 1 ? " person" : " people"); }
+    function mode() { var r = cal.querySelector('input[name="date_type"]:checked'); return r && r.value === "Window of dates" ? "window" : "date"; }
 
     function stateOf(key) {
       var counts = data.days[key];
-      if (new Date(key + "T00:00:00") < today) return "past";
+      if (parse(key) < today) return "past";
       if (!counts || counts.indexOf(-1) !== -1) return "closed";
-      if (counts.indexOf(null) !== -1) return "pending";
-      return Math.min.apply(null, counts) >= +sizeSelect.value ? "available" : "full";
+      var size = groupSize();
+      return counts.every(function (n) { return n === null || n >= size; }) ? "available" : "full";
     }
-    var labels = { available: "Available", full: "Fully booked", pending: "Not yet bookable", closed: "Closed or not yet scheduled", past: "Past" };
+    var labels = { available: "Available", full: "Fully booked", closed: "Closed", past: "Past" };
+
+    function inWindow(key) { return windowStart && key >= windowStart && key <= (windowEnd || windowStart); }
 
     function render() {
       var m = months[monthIdx];
       monthLabel.textContent = fmt(m, { month: "long", year: "numeric" });
       cal.querySelector(".hut-cal-prev").disabled = monthIdx === 0;
       cal.querySelector(".hut-cal-next").disabled = monthIdx === months.length - 1;
-      var html = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map(function (d) { return '<span class="dow">' + d + "</span>"; }).join("");
+      var html = ["M", "T", "W", "T", "F", "S", "S"].map(function (d) { return '<span class="dow">' + d + "</span>"; }).join("");
       var lead = (m.getDay() + 6) % 7;
       for (var i = 0; i < lead; i++) html += "<span></span>";
       for (var d = new Date(m); d.getMonth() === m.getMonth(); d = addDays(d, 1)) {
         var key = iso(d), st = stateOf(key);
+        var cls = "day " + st + (key === chosen && !(picker && mode() === "window") ? " selected" : "") + (picker && mode() === "window" && inWindow(key) ? " in-window" : "");
         var title = fmt(d, { weekday: "long", day: "numeric", month: "long" }) + ": " + labels[st];
-        html += st === "past" || st === "closed"
-          ? '<span class="day ' + st + '" title="' + title + '">' + d.getDate() + "</span>"
-          : '<button type="button" class="day ' + st + '" data-date="' + key + '" title="' + title + '" aria-label="' + title + '">' + d.getDate() + "</button>";
+        var clickable = st === "available" || (picker && mode() === "window" && st !== "past" && st !== "closed") || (!picker && st === "full");
+        html += clickable
+          ? '<button type="button" class="' + cls + '" data-date="' + key + '" title="' + title + '" aria-label="' + title + '">' + d.getDate() + "</button>"
+          : '<span class="' + cls + '" title="' + title + '">' + d.getDate() + "</span>";
       }
       grid.innerHTML = html;
       var count = Object.keys(data.days).filter(function (k) { return stateOf(k) === "available"; }).length;
       summary.textContent = count
-        ? count + " start date" + (count === 1 ? "" : "s") + " available for " + sizeSelect.value + (sizeSelect.value === "1" ? " person" : " people") + ". Choose a date to see the huts and request it."
-        : "No start dates are bookable online for " + sizeSelect.value + (sizeSelect.value === "1" ? " person" : " people") + " yet. The huts open reservations for each summer season at different times. Contact us and we'll book your preferred dates as soon as they do.";
+        ? count + " start dates available for " + people(groupSize()) + "."
+        : "No start dates are currently available for " + people(groupSize()) + ". Contact us and we'll check alternatives.";
     }
 
     function showDetail(key) {
-      var start = new Date(key + "T00:00:00"), st = stateOf(key), counts = data.days[key];
+      var start = parse(key), st = stateOf(key), counts = data.days[key];
       var rows = data.huts.map(function (hut, i) {
         var n = counts[i];
-        var status = n === null ? "not bookable yet" : n === -1 ? "closed" : n === 0 ? "full" : n + " bed" + (n === 1 ? "" : "s") + " free";
+        var status = n === null ? "booking opens soon" : n === -1 ? "closed" : n === 0 ? "full" : n + " bed" + (n === 1 ? "" : "s") + " free";
         return "<li><strong>Night " + (i + 1) + " · " + fmt(addDays(start, i), { weekday: "short", day: "numeric", month: "short" }) +
           '</strong> <a href="' + hut.url + '" target="_blank" rel="noopener">' + hut.name + "</a> — " + status + "</li>";
       }).join("");
-      var href = base + "contact?trip=" + encodeURIComponent(cal.getAttribute("data-trip")) + "&start=" + key + "&group=" + sizeSelect.value + "#contact-form";
-      detail.innerHTML = "<h4>Start " + fmt(start, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) + " — " + labels[st] + "</h4><ul>" + rows + "</ul>" +
-        '<a class="btn btn-small' + (st === "available" ? "" : " btn-outline") + '" href="' + href + '">' +
-        (st === "available" ? "Request this start date →" : "Ask us about this date →") + "</a>";
+      var href = base + "contact?trip=" + encodeURIComponent(trip) + "&start=" + key + "&group=" + groupSize() + "#contact-form";
+      detail.innerHTML = "<h4>" + fmt(start, { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + " — " + labels[st] + "</h4><ul>" + rows + "</ul>" +
+        (st === "available" ? '<a class="btn btn-small" href="' + href + '">Reserve this start date →</a>' : "");
+    }
+
+    function writeSelection() {
+      var f = function (k) { return fmt(parse(k), { weekday: "short", day: "numeric", month: "short", year: "numeric" }); };
+      cal.querySelector('[name="start_date"]').value = mode() === "date" && chosen ? chosen : "";
+      cal.querySelector('[name="window_start"]').value = mode() === "window" && windowStart ? windowStart : "";
+      cal.querySelector('[name="window_end"]').value = mode() === "window" && windowStart ? (windowEnd || windowStart) : "";
+      if (mode() === "date") {
+        selection.textContent = chosen ? "Selected start date: " + f(chosen) + " (3 nights)." : "Choose an available start date.";
+      } else if (!windowStart) {
+        selection.textContent = "Choose the first and last start dates you could do.";
+      } else if (!windowEnd) {
+        selection.textContent = "Window starts " + f(windowStart) + ". Now choose the last start date.";
+      } else {
+        var n = Object.keys(data.days).filter(function (k) { return k >= windowStart && k <= windowEnd && stateOf(k) === "available"; }).length;
+        selection.textContent = "Window: " + f(windowStart) + " – " + f(windowEnd) + " (" + n + " available start date" + (n === 1 ? "" : "s") + ").";
+      }
     }
 
     grid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-date]");
       if (!btn) return;
-      grid.querySelectorAll(".selected").forEach(function (b) { b.classList.remove("selected"); });
-      btn.classList.add("selected");
-      showDetail(btn.getAttribute("data-date"));
+      var key = btn.getAttribute("data-date");
+      if (!picker) { chosen = key; render(); showDetail(key); return; }
+      if (mode() === "date") {
+        chosen = key;
+      } else if (!windowStart || windowEnd || key < windowStart) {
+        windowStart = key; windowEnd = null;
+      } else {
+        windowEnd = key;
+      }
+      render(); writeSelection();
     });
     cal.querySelector(".hut-cal-prev").addEventListener("click", function () { monthIdx--; render(); });
     cal.querySelector(".hut-cal-next").addEventListener("click", function () { monthIdx++; render(); });
-    sizeSelect.addEventListener("change", function () { detail.innerHTML = ""; render(); });
+    sizeSelect.addEventListener("change", function () {
+      if (chosen && stateOf(chosen) !== "available") chosen = null;
+      if (detail) detail.innerHTML = "";
+      if (data) { render(); if (picker) writeSelection(); }
+    });
+    cal.querySelectorAll('input[name="date_type"]').forEach(function (r) {
+      r.addEventListener("change", function () { render(); writeSelection(); });
+    });
+
+    // On the contact form, show this calendar only while its trip is selected.
+    var tripSelect = document.getElementById("trip-interest");
+    function syncVisibility() {
+      var show = tripSelect.value === trip;
+      cal.hidden = !show;
+      cal.querySelectorAll("input").forEach(function (i) { i.disabled = !show; });
+    }
+    if (picker && tripSelect) { tripSelect.addEventListener("change", syncVisibility); syncVisibility(); }
 
     fetch(cal.getAttribute("data-src"), { cache: "no-cache" })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (json) {
         data = json;
-        var keys = Object.keys(data.days).filter(function (k) { return data.days[k].some(function (c) { return c !== -1; }); }).sort();
-        var first = new Date(keys[0] + "T00:00:00"), last = new Date(keys[keys.length - 1] + "T00:00:00");
-        if (first < today) first = today;
-        for (var m = new Date(first.getFullYear(), first.getMonth(), 1); m <= last; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) months.push(m);
-        var firstOpen = keys.filter(function (k) { return stateOf(k) === "available"; })[0] ||
-                        keys.filter(function (k) { return stateOf(k) === "pending" || stateOf(k) === "full"; })[0];
-        if (firstOpen) {
-          var fo = new Date(firstOpen + "T00:00:00");
-          monthIdx = Math.max(0, months.findIndex(function (m) { return m.getFullYear() === fo.getFullYear() && m.getMonth() === fo.getMonth(); }));
-        }
-        cal.querySelector(".hut-cal-updated").textContent = "Hut data last updated " +
-          new Date(data.updated).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) + ".";
+        var keys = Object.keys(data.days).filter(function (k) { return parse(k) >= today; }).sort();
+        var seen = {};
+        keys.forEach(function (k) {
+          var ym = k.slice(0, 7);
+          if (!seen[ym]) { seen[ym] = true; months.push(parse(ym + "-01")); }
+        });
+        var params = new URLSearchParams(window.location.search);
+        if (picker && params.get("trip") === trip && params.get("group")) sizeSelect.value = params.get("group");
+        var want = picker && params.get("trip") === trip && params.get("start");
+        if (want && data.days[want]) chosen = want;
+        var target = chosen || keys.filter(function (k) { return stateOf(k) === "available"; })[0] || keys[0];
+        if (target) monthIdx = Math.max(0, months.findIndex(function (m) { return iso(m).slice(0, 7) === target.slice(0, 7); }));
         render();
+        if (picker) writeSelection();
       })
       .catch(function () {
         cal.classList.add("hut-cal-error");
-        summary.innerHTML = 'Live hut availability couldn\'t be loaded right now. <a href="' + base + "contact?trip=" + cal.getAttribute("data-trip") + '#contact-form">Contact us</a> for dates.';
+        summary.textContent = "Hut availability couldn't be loaded right now. Tell us your preferred dates in the message below and we'll check for you.";
       });
   });
 
