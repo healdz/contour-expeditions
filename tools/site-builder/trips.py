@@ -321,10 +321,10 @@ TRIPS = [
     "card": "A demanding four-day hut-to-hut traverse through the Bernese Oberland, from Lauterbrunnen over two high passes to Kandersteg.",
     "overview": "The Via Alpina crosses Switzerland from east to west, and its Bernese Oberland stages are some of the finest — and toughest — days of walking in the Alps. Starting a short train ride from Interlaken, this self-guided route climbs from the Lauterbrunnen valley past Mürren, then crosses the Sefinenfurgge and the Hohtürli, the highest pass on the trail, with the Eiger, Mönch, and Jungfrau on the horizon. All three nights are spent in Swiss Alpine Club huts — the Rotstockhütte, the Gspaltenhornhütte, and the Blüemlisalphütte — before a final descent past the turquoise Oeschinensee to Kandersteg. It's a big objective packed into a long weekend; we book the huts and hand you the route.",
     "itinerary": [
-      ("Lauterbrunnen to Rotstockhütte", "~13 km · +1,300 m", "Take the train from Interlaken to Lauterbrunnen, then climb past waterfalls to the car-free village of Mürren and on to the Rotstockhütte (2,039 m) beneath the Schilthorn."),
-      ("Rotstockhütte to Gspaltenhornhütte", "~11 km · +1,100 m / −700 m", "Climb steeply to the Sefinenfurgge (2,612 m), with views back to the Jungfrau massif, descend into the Kiental, then climb again to the Gspaltenhornhütte (2,455 m), tucked beneath the north face of the Gspaltenhorn."),
-      ("Gspaltenhornhütte to Blüemlisalphütte", "~12 km · +1,200 m / −800 m", "The crux of the route: descend to the Gamchi valley, then make the long climb over the Hohtürli (2,778 m) to the Blüemlisalphütte (2,840 m), perched above the Blüemlisalp glacier."),
-      ("Blüemlisalphütte to Kandersteg via Oeschinensee", "~10 km · −1,650 m", "Descend to the turquoise Oeschinensee for a swim or a long lunch by the water, then continue down to Kandersteg and take the train back to Interlaken."),
+      ("Lauterbrunnen to Rotstockhütte", "~13 km · +1,500 m / −250 m", "Take the train from Interlaken to Lauterbrunnen, then climb past waterfalls to the car-free village of Mürren and on to the Rotstockhütte (2,039 m) beneath the Schilthorn."),
+      ("Rotstockhütte to Gspaltenhornhütte", "~6.5 km · +850 m / −450 m", "Climb steeply to the Sefinenfurgge (2,612 m), with views back to the Jungfrau massif, descend into the Kiental, then climb again to the Gspaltenhornhütte (2,455 m), tucked beneath the north face of the Gspaltenhorn."),
+      ("Gspaltenhornhütte to Blüemlisalphütte", "~7.5 km · +1,000 m / −600 m", "The crux of the route: descend to the Gamchi valley, then make the long climb over the Hohtürli (2,778 m) to the Blüemlisalphütte (2,840 m), perched above the Blüemlisalp glacier."),
+      ("Blüemlisalphütte to Kandersteg via Oeschinensee", "~12 km · +150 m / −1,800 m", "Descend to the turquoise Oeschinensee for a swim or a long lunch by the water, then continue down to Kandersteg and take the train back to Interlaken."),
     ],
     "included": [
       "3 nights pre-booked: Rotstockhütte, Gspaltenhornhütte, and Blüemlisalphütte",
@@ -343,7 +343,7 @@ TRIPS = [
     "why": [
       ("Big Mountains, Short Trip", "Two high passes and the Bernese Oberland's biggest views, all in four days."),
       ("Huts Booked for You", "SAC huts fill up early in summer. We secure your beds before you leave home."),
-      ("A Real Challenge", "Around 3,600 m of climbing, two high passes, and steep, exposed descents — a serious test for strong hikers."),
+      ("A Real Challenge", "Approx. 3,500 m of climbing over 39 km, two high passes, and steep, exposed descents — a serious test for strong hikers."),
     ],
     "dates": [("June – September 2027: any available start date", "$850 USD pp", "available"), ("2028 season", "TBD", "waitlist")],
     "route": [[46.593,7.909,"Lauterbrunnen"],[46.559,7.892,"Mürren"],[46.545,7.838,"Rotstockhütte"],[46.528,7.820,"Sefinenfurgge"],[46.504,7.818,"Gspaltenhornhütte"],[46.509,7.767,"Hohtürli"],[46.510,7.771,"Blüemlisalphütte"],[46.499,7.727,"Oeschinensee"],[46.495,7.674,"Kandersteg"]],
@@ -361,6 +361,6 @@ TRIPS = [
       ("snowfield", "Two hikers crossing a wide snowfield between bands of rock"),
       ("glacier", "Close-up of crevassed glacier ice and seracs"),
     ],
-    "fitness": "This is a demanding route. Expect 6–8 hours a day with up to 1,450 m of ascent and long, steep descents, carrying an 8–10 kg pack. The Hohtürli has steep, exposed sections with steps and fixed cables, so you should be sure-footed and comfortable with heights. Snow can linger on the passes into early July.",
+    "fitness": "This is a demanding route. Expect 4–6 hours a day with up to 1,500 m of ascent and long, steep descents, carrying an 8–10 kg pack. The Hohtürli has steep, exposed sections with steps and fixed cables, so you should be sure-footed and comfortable with heights. Snow can linger on the passes into early July.",
   },
 ]

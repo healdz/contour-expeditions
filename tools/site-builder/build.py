@@ -13,7 +13,7 @@ GUIDED = [t for t in TRIPS if t["type"] == "guided"]
 UNGUIDED = [t for t in TRIPS if t["type"] == "unguided"]
 YEAR = 2026
 EMAIL = "hello@contour-expeditions.com"
-VER = 14
+VER = 15
 SITE_URL = "https://contour-expeditions.com/"
 DEFAULT_OG = "assets/img/photos/home-hero.jpg"
 SITEMAP = []
@@ -120,8 +120,8 @@ def nav(root, active):
       </button>
       <nav class="primary-nav" id="primary-nav" aria-label="Main">
         <ul>
-          {dd("guided", "Guided Trips", GUIDED, "guided-trips.html", "All guided trips")}
-          {dd("unguided", "Unguided Trips", UNGUIDED, "unguided-trips.html", "All unguided trips")}
+          {dd("guided", "Guided Expeditions", GUIDED, "guided-trips.html", "All guided trips")}
+          {dd("unguided", "Unguided Adventures", UNGUIDED, "unguided-trips.html", "All unguided trips")}
           {link("customize", "customize.html", "Customize Your Adventure")}
           {link("about", "about.html", "About")}
           {link("contact", "contact.html", "Contact", ' class="nav-cta"')}
@@ -477,7 +477,7 @@ def build_trip(t):
 
     <section class="section section-wash" id="dates-prices" aria-labelledby="dates-h">
       <div class="container">
-        <h2 id="dates-h">Dates &amp; <em>Prices</em> <span class="todo">Sample dates</span></h2>
+        <h2 id="dates-h">Dates &amp; <em>Prices</em>{"" if t.get("price_confirmed") else ' <span class="todo">Sample dates</span>'}</h2>
         <!-- TODO: replace sample dates/prices; paste booking URLs into the Reserve/Waitlist href="#" links -->
         <div class="{"dates-layout" if t.get("availability") else ""}">
         <div>

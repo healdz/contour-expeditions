@@ -171,7 +171,7 @@ h2 em, h1 em { font-style: italic; font-weight: 600; }
 .dropdown a span { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 0.78rem; color: var(--slate-light); }
 .dropdown .dropdown-all { border-top: 1px solid var(--rule); margin-top: 0.35rem; padding-top: 0.35rem; }
 
-@media (max-width: 960px) {
+@media (max-width: 1023px) {
   .nav-toggle { display: block; }
   /* Absolute, not fixed: the header's backdrop-filter makes it the containing
      block for fixed children, which collapsed the menu to zero height. */

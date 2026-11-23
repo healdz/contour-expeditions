@@ -2,7 +2,7 @@
 
 The website for **Contour Expeditions**, a travel and expedition company. The owner is non-technical. They make the content and design decisions and expect Claude to build the site, test it, and publish it.
 
-Read this whole file before making changes. Last updated 2026-11-23.
+Read this whole file before making changes. Last updated 2026-11-23 (second session).
 
 ## Key links
 
@@ -74,7 +74,8 @@ Optional trip fields:
   - A start date is available only when every hut has enough beds for the group on consecutive nights.
   - Dates are unavailable only when a hut is full or closed. Seasons not yet published count as available ("booking opens soon").
   - GitHub pauses scheduled workflows after 60 days with no repo activity. Re-enable it from the Actions tab.
-- **Day figures on the trip page are older estimates.** The trip sheet has the corrected figures (total approx. 39 km; Day 2 approx. 6.5 km; Day 3 approx. 7.5 km and +1,000 m; Day 4 approx. 12 km). The owner was asked whether to update the page and has not answered yet.
+- **Day figures** on the trip page match the trip sheet (total approx. 39 km, +3,500 m). If you change one, change the other (`trips.py` and `tools/trip-sheets/content.py`).
+- The "Sample dates" tag is hidden on any trip with `price_confirmed`, so it shows only on the placeholder trips.
 
 ### Forms
 - **Contact and reserve forms are not connected yet.** They post to `https://formspree.io/f/YOUR_FORM_ID`, so submitting shows a "not connected" notice. The owner needs to create a Formspree account and send the form ID.
@@ -97,7 +98,7 @@ Optional trip fields:
   - forest green `#3e5c4d`
 - **Fonts:** Oswald (headings, uppercase), Inter (body). Bracketed labels like `[ GUIDED ]` are part of the style.
 - **Logo:** a hexagon framing stacked contour ridgelines with a red summit dot, used inline in the header and footer and as the favicon. Two alternative logo concepts exist but were not adopted: a plan-view hexagon of contour rings, and a "Contour C". They were saved in `/tmp/ce-logos`, which may be gone.
-- **Home cards:** "Guided Expeditions", "Unguided Adventures", "Customize Your Own Adventure". The top nav still says "Guided Trips" and "Unguided Trips"; the owner was asked whether those should match.
+- **Home cards and top nav:** "Guided Expeditions" and "Unguided Adventures" (nav matches since 2026-11-23). The listing page headings still say "Guided Trips" / "Unguided Trips". Because the nav labels are longer, it switches to the mobile menu below 1024px (`styles.css`); below that width the labels would wrap.
 
 ## Photos
 - **Where photos go:** real photos live in `assets/img/photos/`. Placeholder SVGs live in `assets/img/placeholders/`.
@@ -139,10 +140,6 @@ Optional trip fields:
 - **Testimonials:** real ones to replace the placeholder on the home page.
 - **Content for the other six trips:** real prices, dates and photos.
 - **Google:** submit the sitemap and request indexing in Search Console, and set up a Google Business Profile.
-- **Decisions not yet made:**
-  - Update the Swiss page day figures to match the trip sheet?
-  - Rename the nav to match the home card wording?
-  - Remove the "Sample dates" tag on the Swiss trip?
 - **Trip sheets** for the other trips.
 
 ## Working preferences
