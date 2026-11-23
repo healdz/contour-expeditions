@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Oswald:wght@500&display=swap">
+<style>html,body{margin:0;height:100%;width:100%;overflow:hidden} #m{position:absolute;left:-60px;right:-60px;top:-60px;bottom:-60px}
+.lbl{background:#fff;border:1.5px solid #1f2326;border-radius:2px;padding:2px 6px;font:600 13px Inter,sans-serif;color:#1f2326;box-shadow:none;white-space:nowrap}
+.lbl small{display:block;font-weight:500;font-size:11px;color:#4a535b}
+.lbl.hut{border-color:#c8553d}
+.leaflet-tooltip.lbl:before{display:none}
+.title{position:absolute;z-index:1000;top:14px;left:14px;background:rgba(255,255,255,.94);border:1.5px solid #1f2326;padding:8px 12px;font:500 15px Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#1f2326}
+.title span{display:block;font:500 11px Inter,sans-serif;letter-spacing:0;text-transform:none;color:#4a535b;margin-top:2px}
+.north{position:absolute;z-index:1000;top:14px;right:14px;background:rgba(255,255,255,.94);border:1.5px solid #1f2326;width:38px;height:46px;text-align:center;font:500 13px Oswald,sans-serif;padding-top:4px;box-sizing:border-box}
+.daytag{background:#c8553d;color:#fff;border:0;border-radius:10px;font:600 11px Inter,sans-serif;padding:1px 7px;box-shadow:none}
+.daytag:before{display:none}
+.leaflet-control-scale-line{font:500 11px Inter,sans-serif;border-color:#1f2326;background:rgba(255,255,255,.85)}
+.leaflet-control-attribution{font:10px Inter,sans-serif}
+</style></head><body><div id="m"></div>
+<div class="title">__TITLE__<span>__SUB__</span></div>
+<div class="north"><svg width="18" height="20" viewBox="0 0 20 24"><path d="M10 1 17 22 10 17 3 22z" fill="#1f2326"/></svg><div style="margin-top:-4px">N</div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+var LINES = __LINES__, PTS = __PTS__;
+var map = L.map('m', {zoomControl:false, zoomSnap:0.25});
+L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {maxZoom:17,
+  attribution:'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)'}).addTo(map);
+var DAY = __DAY__, all = LINES[DAY - 1];
+LINES.forEach(function(l, i){ if (i !== DAY - 1) L.polyline(l, {color:'#1f2326', weight:3, opacity:.35, dashArray:'6 6'}).addTo(map); });
+L.polyline(all, {color:'#c8553d', weight:3, opacity:1, dashArray:'9 6', lineCap:'butt'}).addTo(map);
+// direction arrows along the day's route
+for (var k = 1; k < 6; k++) {
+  var i = Math.floor(all.length * k / 6), p = map.options.crs.latLngToPoint(L.latLng(all[i]), 14), q = map.options.crs.latLngToPoint(L.latLng(all[Math.min(i + 4, all.length - 1)]), 14);
+  var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
+  L.marker(all[i], {interactive:false, icon: L.divIcon({className:'', iconSize:[18,18], iconAnchor:[9,9],
+    html:'<svg width="18" height="18" viewBox="0 0 18 18" style="transform:rotate(' + ang + 'deg)"><circle cx="9" cy="9" r="8" fill="#fff" stroke="#c8553d" stroke-width="1.5"/><path d="M6 5l5 4-5 4" fill="none" stroke="#c8553d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'})}).addTo(map);
+}
+var dirs = __DIRS__;
+PTS.filter(function(p){ return __NAMES__.indexOf(p[0]) !== -1; }).forEach(function(p){
+  var style = p[3]==='hut' ? {radius:9, color:'#1f2326', weight:2, fillColor:'#c8553d', fillOpacity:1}
+            : p[3]==='pass' ? {radius:7, color:'#1f2326', weight:2, fillColor:'#fff', fillOpacity:1}
+            : p[3]==='start' ? {radius:9, color:'#fff', weight:3, fillColor:'#1f2326', fillOpacity:1}
+            : {radius:6, color:'#1f2326', weight:2, fillColor:'#fff', fillOpacity:1};
+  L.circleMarker([p[1],p[2]], style).addTo(map).bindTooltip(p[0]+'<small>'+p[4]+'</small>',
+    {permanent:true, direction:dirs[p[0]]||'right', offset:[dirs[p[0]]==='left'?-6:dirs[p[0]]==='right'?6:0, 0], className:'lbl'+(p[3]==='hut'?' hut':'')});
+});
+L.control.scale({metric:true, imperial:false, maxWidth:180, position:'bottomleft'}).addTo(map); document.querySelector('.leaflet-bottom.leaflet-left').style.cssText='left:60px;bottom:60px'; document.querySelector('.leaflet-bottom.leaflet-right').style.cssText='right:60px;bottom:60px';
+map.fitBounds(L.latLngBounds(all), {paddingTopLeft:[120,170], paddingBottomRight:[120,120]});
+// Zoom in 15% past the padded fit, but never so far that the start/finish (and their labels) leave the frame.
+var B = L.latLngBounds(all), z1 = map.getZoom() + Math.log2(1.15);
+var zMax = map.getBoundsZoom(B, false, L.point(2 * (60 + 30), 2 * (60 + 30)));
+map.setView(B.getCenter(), Math.min(z1, zMax), {animate:false});
+console.log('ZOOM ' + z1.toFixed(2) + ' cap ' + zMax.toFixed(2));
+</script></body></html>
