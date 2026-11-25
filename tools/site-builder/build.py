@@ -19,7 +19,7 @@ PHONE_TEL = "+19704569659"
 # FormSubmit (formsubmit.co) delivers all three site forms to this inbox. After activation, swap the
 # address for the random string FormSubmit emails you, so the address isn't exposed to bots.
 FORM_TO = "f3d10a96e8d7729009c83224eed1bda3"  # FormSubmit alias for info@; works once the activation email has been confirmed
-VER = 17
+VER = 18
 SITE_URL = "https://contour-expeditions.com/"
 DEFAULT_OG = "assets/img/photos/home-hero.jpg"
 SITEMAP = []

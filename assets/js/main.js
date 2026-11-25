@@ -92,24 +92,27 @@
         if (sel.value && !sel.disabled) fd.set(sel.name, sel.options[sel.selectedIndex].text);
       });
 
-      var btn = form.querySelector('[type="submit"]');
-      btn.disabled = true;
+      // FormSubmit can take many seconds to answer, so confirm straight away. The answers stay in
+      // the (hidden) form, and if the send fails the confirmation is removed and the form comes back.
+      status.hidden = true;
+      var panel = done();
       fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
         method: "POST",
         body: fd,
-        headers: { Accept: "application/json" }
+        headers: { Accept: "application/json" },
+        keepalive: true // lets the send finish even if the visitor clicks away
       })
         .then(function (res) { return res.json(); })
         .then(function (data) {
           if (String(data.success) !== "true") throw new Error(data.message || "Request failed");
           form.reset();
-          done();
         })
         .catch(function (err) {
           console.error("FormSubmit:", err);
+          panel.remove();
+          form.hidden = false;
           show(failed);
-        })
-        .finally(function () { btn.disabled = false; });
+        });
     });
 
     function show(msg) {
@@ -150,6 +153,7 @@
       form.parentNode.insertBefore(panel, form.nextSibling);
       panel.scrollIntoView({ behavior: "smooth", block: "center" });
       panel.focus({ preventScroll: true });
+      return panel;
     }
   });
 
