@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Oswald:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/styles.css?v=15">
+  <link rel="stylesheet" href="assets/css/styles.css?v=16">
 </head>
 <body data-root="">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -111,10 +111,10 @@
       <div class="container narrow">
         <div class="section-head"><span class="label">Get Started</span><h2 id="form-h">Tell Us About Your <em>Expedition</em></h2>
           <p>We reply to every enquiry within two business days.</p></div>
-        <form class="form" id="custom-expedition-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-formspree>
-          <!-- TODO: replace YOUR_FORM_ID with your Formspree form ID -->
+        <form class="form" id="custom-expedition-form" action="https://formsubmit.co/info@contour-expeditions.com" method="POST" data-formsubmit data-email="info@contour-expeditions.com">
           <input type="hidden" name="_subject" value="Custom expedition enquiry">
-          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          <input type="hidden" name="_template" value="table">
+          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
           <div class="form-row">
             <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" required autocomplete="name"></div>
             <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
@@ -128,7 +128,7 @@
           </fieldset>
           <div class="form-row">
             <div class="field"><label for="c-dates">Dates or season</label><input id="c-dates" name="dates" placeholder="e.g. July 2027, flexible"></div>
-            <div class="field"><label for="c-size">Group size</label><input id="c-size" name="group_size" type="number" min="1" max="50"></div>
+            <div class="field"><label for="c-size">Group size</label><input id="c-size" name="group size" type="number" min="1" max="50"></div>
           </div>
           <div class="form-row">
             <div class="field"><label for="c-exp">Experience level</label>
@@ -173,7 +173,8 @@
             <li><a href="customize">Customize Your Adventure</a></li>
             <li><a href="about">About</a></li>
             <li><a href="contact">Contact</a></li>
-            <li><a href="mailto:hello@contour-expeditions.com">hello@contour-expeditions.com</a></li>
+            <li><a href="mailto:info@contour-expeditions.com">info@contour-expeditions.com</a></li>
+            <li><a href="tel:+19704569659">+1 (970) 456-9659</a></li>
           </ul>
         </div>
       </div>
@@ -184,6 +185,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=15"></script>
+  <script src="assets/js/main.js?v=16"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
    - mobile nav toggle and dropdown menus
    - route maps (Leaflet + OpenTopoMap) on trip pages
    - placeholder booking links fall back to the contact form
-   - forms show a notice until a Formspree ID is configured
+   - forms submit to FormSubmit (formsubmit.co)
 */
 (function () {
   "use strict";
@@ -71,33 +71,43 @@
     if (match) tripField.value = wanted;
   }
 
-  /* ---------- Forms ---------- */
-  document.querySelectorAll("form[data-formspree]").forEach(function (form) {
+  /* ---------- Forms ----------
+     All three forms (contact, reserve, customize) are emailed by FormSubmit (formsubmit.co),
+     sent in the background through its AJAX endpoint. */
+  document.querySelectorAll("form[data-formsubmit]").forEach(function (form) {
     var status = form.querySelector(".form-status");
+    var email = form.getAttribute("data-email");
+    var failed = "Something went wrong sending your message. Please try again or email us at " + email + ".";
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (form.querySelector('[name="_gotcha"]').value) return; // spam bot
+      if (form.querySelector('[name="_honey"]').value) return; // spam bot
 
-      if (form.action.indexOf("YOUR_FORM_ID") !== -1) {
-        show("This form isn't connected yet. Please email us directly in the meantime.");
-        return;
-      }
+      // Readable email: trip names instead of slugs, and ticked checkboxes joined into one line
+      var fd = new FormData();
+      new FormData(form).forEach(function (value, key) {
+        fd.has(key) ? fd.set(key, fd.get(key) + ", " + value) : fd.append(key, value);
+      });
+      form.querySelectorAll("select").forEach(function (sel) {
+        if (sel.value && !sel.disabled) fd.set(sel.name, sel.options[sel.selectedIndex].text);
+      });
 
       var btn = form.querySelector('[type="submit"]');
       btn.disabled = true;
-      fetch(form.action, {
+      fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
         method: "POST",
-        body: new FormData(form),
+        body: fd,
         headers: { Accept: "application/json" }
       })
-        .then(function (res) {
-          if (!res.ok) throw new Error("Request failed");
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (String(data.success) !== "true") throw new Error(data.message || "Request failed");
           form.reset();
           show("Thanks — your message is on its way. We'll be in touch within two business days.");
         })
-        .catch(function () {
-          show("Something went wrong sending your message. Please try again or email us directly.");
+        .catch(function (err) {
+          console.error("FormSubmit:", err);
+          show(failed);
         })
         .finally(function () { btn.disabled = false; });
     });
@@ -256,8 +266,8 @@
     if (picker) {
       fields = cal.closest(".date-fields");
       dialog = cal.closest("dialog");
-      startInput = fields.querySelector('[name="start_date"]');
-      endInput = fields.querySelector('[name="end_date"]');
+      startInput = fields.querySelector('[name="start date"]');
+      endInput = fields.querySelector('[name="end date"]');
       msg = document.getElementById("f-msg");
       tripSelect = document.getElementById("trip-interest");
       var short = fields.getAttribute("data-trip-short");

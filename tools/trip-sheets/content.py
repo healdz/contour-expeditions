@@ -155,12 +155,12 @@ AFTER = [
 ]
 
 SAFETY = [
-  ("Emergency numbers", "Rega air rescue 1414 · European emergency 112 · Ambulance 144 · Police 117. Contour Expeditions 24/7 support line: " + PLACEHOLDER + "."),
+  ("Emergency numbers", "Rega air rescue 1414 · European emergency 112 · Ambulance 144 · Police 117. Contour Expeditions 24/7 support line (phone or WhatsApp): +1 (970) 456-9659."),
   ("Weather", "Check the MeteoSwiss forecast each morning. Summer thunderstorms often build in the afternoon, so start early and aim to be over each pass by early afternoon."),
   ("Snow", "Snow can linger on the Sefinenfurgge and Hohtürli into July. We check conditions before you depart and will tell you whether microspikes are needed."),
   ("Hut etiquette", "Arrive by approx. 5 pm. Boots off at the door; change into your own hut shoes (slippers aren't provided). Sleeping is in shared dormitories, so keep noise and headlamp use to a minimum after lights out. Dinner is usually served around 6–6:30 pm, quiet hours are 10 pm–6 am, and breakfast is early. Carry out all your rubbish, and let the warden know where you're heading next."),
   ("Trail markings", "The whole route follows white-red-white mountain trail markings. Stay on the marked path, especially on scree and near the passes."),
 ]
 
-CONTACT = [("Email", "hello@contour-expeditions.com"), ("Phone / WhatsApp", PLACEHOLDER), ("Website", "contour-expeditions.com")]
+CONTACT = [("Email", "support@contour-expeditions.com"), ("Phone / WhatsApp", "+1 (970) 456-9659"), ("Website", "contour-expeditions.com")]
 DISCLAIMER = "Distances, heights and walking times are approximate and assume fit hikers without long breaks. Conditions in the mountains change; always check the weather and trail conditions and follow local signage."

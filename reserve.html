@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Oswald:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/styles.css?v=15">
+  <link rel="stylesheet" href="assets/css/styles.css?v=16">
 </head>
 <body data-root="">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -72,10 +72,10 @@
     <section class="section section-panel" style="padding-top:3rem">
       <div class="container split" style="align-items:start">
         <div id="booking-form">
-          <form class="form" id="booking-form-el" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-formspree>
-          <!-- TODO: replace YOUR_FORM_ID with your Formspree form ID -->
+          <form class="form" id="booking-form-el" action="https://formsubmit.co/info@contour-expeditions.com" method="POST" data-formsubmit data-email="info@contour-expeditions.com">
           <input type="hidden" name="_subject" value="Reservation request">
-          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          <input type="hidden" name="_template" value="table">
+          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
             <div class="form-row">
               <div class="field"><label for="f-name">Name <span class="req">*</span></label><input id="f-name" name="name" required autocomplete="name"></div>
               <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
@@ -83,14 +83,14 @@
             <div class="field"><label for="trip-interest">Trip <span class="req">*</span></label>
               <select id="trip-interest" name="trip" required><option value="">Select a trip</option><option value="peru-huayhuash">Peruvian Trekking (Guided)</option><option value="ecuador-mountaineering">Mountaineering Ecuador (Guided)</option><option value="dolomites-multisport">Dolomites Multisport (Guided)</option><option value="dolomites-hut-to-hut">Dolomites Hut to Hut (Unguided)</option><option value="morocco-surf-safari">Moroccan Surf Safari (Unguided)</option><option value="balkans-bikepacking">Balkans Bike Backpacking (Unguided)</option><option value="swiss-via-alpina">Swiss Alps: Via Alpina (Unguided)</option></select></div>
             <div class="field"><label for="f-group">Group size</label>
-              <select id="f-group" name="group_size"><option value="1">1 person</option><option value="2" selected>2 people</option><option value="3">3 people</option><option value="4">4 people</option><option value="5">5 people</option><option value="6">6 people</option><option value="7">7 people</option><option value="8">8 people</option><option value="9+">9 or more</option></select></div>
+              <select id="f-group" name="group size"><option value="1">1 person</option><option value="2" selected>2 people</option><option value="3">3 people</option><option value="4">4 people</option><option value="5">5 people</option><option value="6">6 people</option><option value="7">7 people</option><option value="8">8 people</option><option value="9+">9 or more</option></select></div>
             
             <div class="date-fields" data-trip="swiss-via-alpina" data-trip-short="the Via Alpina" hidden>
               <div class="form-row">
                 <div class="field"><label for="f-start-swiss-via-alpina">Start date</label>
-                  <input class="date-input" id="f-start-swiss-via-alpina" name="start_date" placeholder="Select start date" readonly aria-haspopup="dialog"></div>
+                  <input class="date-input" id="f-start-swiss-via-alpina" name="start date" placeholder="Select start date" readonly aria-haspopup="dialog"></div>
                 <div class="field"><label for="f-end-swiss-via-alpina">End date</label>
-                  <input class="date-input" id="f-end-swiss-via-alpina" name="end_date" placeholder="Select end date" readonly aria-haspopup="dialog"></div>
+                  <input class="date-input" id="f-end-swiss-via-alpina" name="end date" placeholder="Select end date" readonly aria-haspopup="dialog"></div>
               </div>
               <p class="date-fields-note">Huts are open June through September. This trip is 4 days / 3 nights, so the end date is set from your start date.</p>
               <dialog class="date-dialog" aria-labelledby="dd-title-swiss-via-alpina">
@@ -164,7 +164,8 @@
             <li><a href="customize">Customize Your Adventure</a></li>
             <li><a href="about">About</a></li>
             <li><a href="contact">Contact</a></li>
-            <li><a href="mailto:hello@contour-expeditions.com">hello@contour-expeditions.com</a></li>
+            <li><a href="mailto:info@contour-expeditions.com">info@contour-expeditions.com</a></li>
+            <li><a href="tel:+19704569659">+1 (970) 456-9659</a></li>
           </ul>
         </div>
       </div>
@@ -175,6 +176,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=15"></script>
+  <script src="assets/js/main.js?v=16"></script>
 </body>
 </html>

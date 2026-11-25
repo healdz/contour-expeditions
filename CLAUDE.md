@@ -2,7 +2,7 @@
 
 The website for **Contour Expeditions**, a travel and expedition company. The owner is non-technical. They make the content and design decisions and expect Claude to build the site, test it, and publish it.
 
-Read this whole file before making changes. Last updated 2026-11-23 (second session).
+Read this whole file before making changes. Last updated 2026-11-25.
 
 ## Key links
 
@@ -78,7 +78,10 @@ Optional trip fields:
 - The "Sample dates" tag is hidden on any trip with `price_confirmed`, so it shows only on the placeholder trips.
 
 ### Forms
-- **Contact and reserve forms are not connected yet.** They post to `https://formspree.io/f/YOUR_FORM_ID`, so submitting shows a "not connected" notice. The owner needs to create a Formspree account and send the form ID.
+- **All three forms (contact, reserve, customize) are delivered by FormSubmit (formsubmit.co)**, with no account. `main.js` posts them in the background to `https://formsubmit.co/ajax/<FORM_TO>`. `FORM_TO` in `build.py` is the inbox address until FormSubmit's random alias string replaces it after activation.
+  - The hidden `_subject` field names the form ("Website enquiry", "Reservation request", "Custom expedition enquiry"). `_template=table`, and `_honey` is the honeypot.
+  - Before sending, the script swaps select values for their visible text (so trip names, not slugs) and joins ticked checkboxes into one line.
+  - The owner tried Formspree and Forminit first and chose FormSubmit. The Forminit account (form `g6m5mep91rb`) is unused.
 - **The reserve form** has a trip select, a group size, and (for the Swiss trip) start/end date fields that open an "Available Dates" pop-up. It also auto-writes "Hi, I'd like to reserve the Via Alpina for N people starting on DATE." The page accepts the URL parameters `?trip=&start=&group=`.
 
 ### SEO already done
@@ -132,11 +135,15 @@ Optional trip fields:
   - Use "approx." rather than "about".
   - Huts are shared dorms; slippers are not provided, so bring flip-flops or spare shoes.
   - Liner rental is €10 per night. The owner gave euros, but CHF may be correct; still to confirm.
-- **Still placeholder:** the 24/7 support phone number.
+
+## Contact details (set 2026-11-25)
+- **Email:** the owner's main inbox is `zane@contour-expeditions.com`, with aliases `info@`, `hello@` and `help@`. The site uses `info@` everywhere: footer, contact page, forms, JSON-LD (`EMAIL` in `build.py`).
+- **Trip sheets** use `support@contour-expeditions.com`. The owner was told on 2026-11-25 that this must be added as an alias; it wasn't one of the aliases listed.
+- **Phone / WhatsApp:** `+1 (970) 456-9659` (`PHONE` in `build.py`) appears in the footer, the contact page (tel and wa.me links), JSON-LD `telephone`, and as the trip sheet's 24/7 support line. It is the owner's personal number; they plan to switch it to a Google Voice number later.
 
 ## Waiting on the owner (open to-dos)
-- **Formspree form ID**, so the forms work.
-- **Contact details:** phone/WhatsApp, base city, and social media links. The footer icons are `data-todo` placeholders.
+- **FormSubmit alias:** after activation, swap `FORM_TO` in `build.py` for the random string.
+- **Contact details:** base city and social media links. The footer icons are `data-todo` placeholders.
 - **Testimonials:** real ones to replace the placeholder on the home page.
 - **Content for the other six trips:** real prices, dates and photos.
 - **Google:** submit the sitemap and request indexing in Search Console, and set up a Google Business Profile.

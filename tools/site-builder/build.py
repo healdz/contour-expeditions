@@ -12,8 +12,13 @@ SITE = sys.argv[1]
 GUIDED = [t for t in TRIPS if t["type"] == "guided"]
 UNGUIDED = [t for t in TRIPS if t["type"] == "unguided"]
 YEAR = 2026
-EMAIL = "hello@contour-expeditions.com"
-VER = 15
+EMAIL = "info@contour-expeditions.com"
+PHONE = "+1 (970) 456-9659"  # also on WhatsApp
+PHONE_TEL = "+19704569659"
+# FormSubmit (formsubmit.co) delivers all three site forms to this inbox. After activation, swap the
+# address for the random string FormSubmit emails you, so the address isn't exposed to bots.
+FORM_TO = EMAIL
+VER = 16
 SITE_URL = "https://contour-expeditions.com/"
 DEFAULT_OG = "assets/img/photos/home-hero.jpg"
 SITEMAP = []
@@ -162,6 +167,7 @@ def footer(root):
             <li><a href="{root}about.html">About</a></li>
             <li><a href="{root}contact.html">Contact</a></li>
             <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+            <li><a href="tel:{PHONE_TEL}">{PHONE}</a></li>
           </ul>
         </div>
       </div>
@@ -322,9 +328,9 @@ def date_fields(t):
             <div class="date-fields" data-trip="{t["slug"]}" data-trip-short="{e(av["short"])}" hidden>
               <div class="form-row">
                 <div class="field"><label for="f-start-{t["slug"]}">Start date</label>
-                  <input class="date-input" id="f-start-{t["slug"]}" name="start_date" placeholder="Select start date" readonly aria-haspopup="dialog"></div>
+                  <input class="date-input" id="f-start-{t["slug"]}" name="start date" placeholder="Select start date" readonly aria-haspopup="dialog"></div>
                 <div class="field"><label for="f-end-{t["slug"]}">End date</label>
-                  <input class="date-input" id="f-end-{t["slug"]}" name="end_date" placeholder="Select end date" readonly aria-haspopup="dialog"></div>
+                  <input class="date-input" id="f-end-{t["slug"]}" name="end date" placeholder="Select end date" readonly aria-haspopup="dialog"></div>
               </div>
               <p class="date-fields-note">Huts are open June through September. This trip is {days} days / {av["nights"]} nights, so the end date is set from your start date.</p>
               <dialog class="date-dialog" aria-labelledby="dd-title-{t["slug"]}">
@@ -636,6 +642,7 @@ def build_home():
         "logo": SITE_URL + "assets/img/favicon-512.png",
         "image": SITE_URL + DEFAULT_OG,
         "email": EMAIL,
+        "telephone": PHONE_TEL,
         "description": "Guided expeditions, self-guided adventures, and custom trips in Peru, Ecuador, the Alps, Morocco, and the Balkans.",
         "areaServed": ["Peru", "Ecuador", "Italy", "Switzerland", "Morocco", "Bosnia and Herzegovina", "Montenegro"],
         "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "TouristTrip", "name": t["name"], "url": abs_url(f"trips/{t['slug']}.html")}} for t in TRIPS],
@@ -694,10 +701,10 @@ def build_listing(kind):
 
 
 def form_open(fid, subject):
-    return f'''<form class="form" id="{fid}" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-formspree>
-          <!-- TODO: replace YOUR_FORM_ID with your Formspree form ID -->
+    return f'''<form class="form" id="{fid}" action="https://formsubmit.co/{FORM_TO}" method="POST" data-formsubmit data-email="{EMAIL}">
           <input type="hidden" name="_subject" value="{subject}">
-          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>'''
+          <input type="hidden" name="_template" value="table">
+          <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'''
 
 
 def build_customize():
@@ -765,7 +772,7 @@ def build_customize():
           </fieldset>
           <div class="form-row">
             <div class="field"><label for="c-dates">Dates or season</label><input id="c-dates" name="dates" placeholder="e.g. July 2027, flexible"></div>
-            <div class="field"><label for="c-size">Group size</label><input id="c-size" name="group_size" type="number" min="1" max="50"></div>
+            <div class="field"><label for="c-size">Group size</label><input id="c-size" name="group size" type="number" min="1" max="50"></div>
           </div>
           <div class="form-row">
             <div class="field"><label for="c-exp">Experience level</label>
@@ -844,7 +851,7 @@ def build_contact(kind="contact"):
         trip_field = f'''<div class="field"><label for="trip-interest">Trip <span class="req">*</span></label>
               <select id="trip-interest" name="trip" required><option value="">Select a trip</option>{opts}</select></div>
             <div class="field"><label for="f-group">Group size</label>
-              <select id="f-group" name="group_size">{groups}<option value="9+">9 or more</option></select></div>
+              <select id="f-group" name="group size">{groups}<option value="9+">9 or more</option></select></div>
             {"".join(date_fields(t) for t in TRIPS if t.get("availability"))}'''
         form_id, subject, submit = "booking-form", "Reservation request", "Request Reservation →"
         side = f'''<h2>How Booking <em>Works</em></h2>
@@ -863,7 +870,7 @@ def build_contact(kind="contact"):
         side = f'''<h2>Reach <em>Us</em></h2>
           <ul class="contact-list">
             <li><strong>Email</strong><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-            <li><strong>Phone / WhatsApp</strong><span>+1 (000) 000-0000 <span class="todo">Placeholder</span></span></li>
+            <li><strong>Phone / WhatsApp</strong><span><a href="tel:{PHONE_TEL}">{PHONE}</a> · <a href="https://wa.me/{PHONE_TEL[1:]}">WhatsApp</a></span></li>
             <li><strong>Based in</strong><span>City, State <span class="todo">Placeholder</span></span></li>
             <li><strong>Response time</strong><span>Within two business days</span></li>
           </ul>
