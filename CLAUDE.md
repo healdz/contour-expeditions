@@ -78,7 +78,7 @@ Optional trip fields:
 - The "Sample dates" tag is hidden on any trip with `price_confirmed`, so it shows only on the placeholder trips.
 
 ### Forms
-- **All three forms (contact, reserve, customize) are delivered by FormSubmit (formsubmit.co)**, with no account. `main.js` posts them in the background to `https://formsubmit.co/ajax/<FORM_TO>`. `FORM_TO` in `build.py` is the inbox address until FormSubmit's random alias string replaces it after activation.
+- **All three forms (contact, reserve, customize) are delivered by FormSubmit (formsubmit.co)**, with no account. `main.js` posts them in the background to `https://formsubmit.co/ajax/<FORM_TO>`. `FORM_TO` in `build.py` is FormSubmit's random alias string for info@ (so the address is not exposed to bots).
   - The hidden `_subject` field names the form ("Website enquiry", "Reservation request", "Custom expedition enquiry"). `_template=table`, and `_honey` is the honeypot.
   - Before sending, the script swaps select values for their visible text (so trip names, not slugs) and joins ticked checkboxes into one line.
   - The owner tried Formspree and Forminit first and chose FormSubmit. The Forminit account (form `g6m5mep91rb`) is unused.
@@ -142,7 +142,7 @@ Optional trip fields:
 - **Phone / WhatsApp:** `+1 (970) 456-9659` (`PHONE` in `build.py`) appears in the footer, the contact page (tel and wa.me links), JSON-LD `telephone`, and as the trip sheet's 24/7 support line. It is the owner's personal number; they plan to switch it to a Google Voice number later.
 
 ## Waiting on the owner (open to-dos)
-- **FormSubmit alias:** after activation, swap `FORM_TO` in `build.py` for the random string.
+- **FormSubmit activation:** the alias is in place; confirm the owner clicked "Activate Form" in the FormSubmit email, then test each form.
 - **Contact details:** base city and social media links. The footer icons are `data-todo` placeholders.
 - **Testimonials:** real ones to replace the placeholder on the home page.
 - **Content for the other six trips:** real prices, dates and photos.
