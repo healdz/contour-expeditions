@@ -137,7 +137,7 @@ Optional trip fields:
   - Liner rental is €10 per night. The owner gave euros, but CHF may be correct; still to confirm.
 
 ## Contact details (set 2026-11-25)
-- **Email:** the owner's main inbox is `zane@contour-expeditions.com`, with aliases `info@`, `hello@` and `help@`. The site uses `info@` everywhere: footer, contact page, forms, JSON-LD (`EMAIL` in `build.py`).
+- **Email:** the owner's main inbox is `zane@contour-expeditions.com`, with aliases `info@`, `hello@` and `help@`. The site uses `info@` in the footer, contact page and JSON-LD (`EMAIL` in `build.py`). `support@` (`SUPPORT_EMAIL`, now a real alias) is shown after a form is sent.
 - **Trip sheets** use `support@contour-expeditions.com`. The owner was told on 2026-11-25 that this must be added as an alias; it wasn't one of the aliases listed.
 - **Phone / WhatsApp:** `+1 (970) 456-9659` (`PHONE` in `build.py`) appears in the footer, the contact page (tel and wa.me links), JSON-LD `telephone`, and as the trip sheet's 24/7 support line. It is the owner's personal number; they plan to switch it to a Google Voice number later.
 

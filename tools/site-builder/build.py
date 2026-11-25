@@ -13,6 +13,7 @@ GUIDED = [t for t in TRIPS if t["type"] == "guided"]
 UNGUIDED = [t for t in TRIPS if t["type"] == "unguided"]
 YEAR = 2026
 EMAIL = "info@contour-expeditions.com"
+SUPPORT_EMAIL = "support@contour-expeditions.com"  # shown to visitors after a form is sent
 PHONE = "+1 (970) 456-9659"  # also on WhatsApp
 PHONE_TEL = "+19704569659"
 # FormSubmit (formsubmit.co) delivers all three site forms to this inbox. After activation, swap the
@@ -701,7 +702,7 @@ def build_listing(kind):
 
 
 def form_open(fid, subject, done_title, done_text):
-    return f'''<form class="form" id="{fid}" action="https://formsubmit.co/{FORM_TO}" method="POST" data-formsubmit data-email="{EMAIL}" data-done-title="{done_title}" data-done-text="{done_text}">
+    return f'''<form class="form" id="{fid}" action="https://formsubmit.co/{FORM_TO}" method="POST" data-formsubmit data-email="{SUPPORT_EMAIL}" data-done-title="{done_title}" data-done-text="{done_text}">
           <input type="hidden" name="_subject" value="{subject}">
           <input type="hidden" name="_template" value="table">
           <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'''
