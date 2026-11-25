@@ -103,7 +103,7 @@
         .then(function (data) {
           if (String(data.success) !== "true") throw new Error(data.message || "Request failed");
           form.reset();
-          show("Thanks — your message is on its way. We'll be in touch within two business days.");
+          done();
         })
         .catch(function (err) {
           console.error("FormSubmit:", err);
@@ -116,6 +116,40 @@
       status.textContent = msg;
       status.hidden = false;
       status.focus();
+    }
+
+    // Replace the form with a confirmation and links to keep browsing
+    function done() {
+      var base = document.body.getAttribute("data-root") || "";
+      var panel = document.createElement("div");
+      panel.className = "form-success";
+      panel.setAttribute("role", "status");
+      panel.tabIndex = -1;
+      var h = document.createElement("h2");
+      h.textContent = form.getAttribute("data-done-title");
+      var p = document.createElement("p");
+      p.textContent = form.getAttribute("data-done-text") + " Questions in the meantime? Email us at ";
+      var mail = document.createElement("a");
+      mail.href = "mailto:" + email;
+      mail.textContent = email;
+      p.appendChild(mail);
+      p.appendChild(document.createTextNode("."));
+      var links = document.createElement("div");
+      links.className = "form-success-links";
+      [["Browse Guided Expeditions", "guided-trips", ""], ["Browse Unguided Adventures", "unguided-trips", " btn-outline"]].forEach(function (l) {
+        var a = document.createElement("a");
+        a.className = "btn" + l[2];
+        a.href = base + l[1];
+        a.textContent = l[0] + " →";
+        links.appendChild(a);
+      });
+      panel.appendChild(h);
+      panel.appendChild(p);
+      panel.appendChild(links);
+      form.hidden = true;
+      form.parentNode.insertBefore(panel, form.nextSibling);
+      panel.scrollIntoView({ behavior: "smooth", block: "center" });
+      panel.focus({ preventScroll: true });
     }
   });
 

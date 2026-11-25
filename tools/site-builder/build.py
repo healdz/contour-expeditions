@@ -18,7 +18,7 @@ PHONE_TEL = "+19704569659"
 # FormSubmit (formsubmit.co) delivers all three site forms to this inbox. After activation, swap the
 # address for the random string FormSubmit emails you, so the address isn't exposed to bots.
 FORM_TO = "f3d10a96e8d7729009c83224eed1bda3"  # FormSubmit alias for info@; works once the activation email has been confirmed
-VER = 16
+VER = 17
 SITE_URL = "https://contour-expeditions.com/"
 DEFAULT_OG = "assets/img/photos/home-hero.jpg"
 SITEMAP = []
@@ -700,8 +700,8 @@ def build_listing(kind):
     page(f"{kind}-trips.html", title, intro, kind, body)
 
 
-def form_open(fid, subject):
-    return f'''<form class="form" id="{fid}" action="https://formsubmit.co/{FORM_TO}" method="POST" data-formsubmit data-email="{EMAIL}">
+def form_open(fid, subject, done_title, done_text):
+    return f'''<form class="form" id="{fid}" action="https://formsubmit.co/{FORM_TO}" method="POST" data-formsubmit data-email="{EMAIL}" data-done-title="{done_title}" data-done-text="{done_text}">
           <input type="hidden" name="_subject" value="{subject}">
           <input type="hidden" name="_template" value="table">
           <label class="hp" aria-hidden="true">Leave blank <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'''
@@ -758,7 +758,7 @@ def build_customize():
       <div class="container narrow">
         <div class="section-head"><span class="label">Get Started</span><h2 id="form-h">Tell Us About Your <em>Expedition</em></h2>
           <p>We reply to every enquiry within two business days.</p></div>
-        {form_open("custom-expedition-form", "Custom expedition enquiry")}
+        {form_open("custom-expedition-form", "Custom expedition enquiry", "Enquiry received", "Thanks for sharing your idea. We've received your custom expedition enquiry and will be in touch shortly, within two business days, to set up a planning call.")}
           <div class="form-row">
             <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" required autocomplete="name"></div>
             <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
@@ -854,6 +854,7 @@ def build_contact(kind="contact"):
               <select id="f-group" name="group size">{groups}<option value="9+">9 or more</option></select></div>
             {"".join(date_fields(t) for t in TRIPS if t.get("availability"))}'''
         form_id, subject, submit = "booking-form", "Reservation request", "Request Reservation →"
+        done = ("Reservation request received", "We've received your reservation request and will confirm the details shortly, within two business days.")
         side = f'''<h2>How Booking <em>Works</em></h2>
           <ol class="steps steps-compact">
             <li><span class="pin">1</span><div><h3>Send Your Request</h3><p>Choose your trip, group size, and dates.</p></div></li>
@@ -867,6 +868,7 @@ def build_contact(kind="contact"):
         trip_field = f'''<div class="field"><label for="trip-interest">Trip of interest</label>
               <select id="trip-interest" name="trip"><option value="">General enquiry</option>{opts}<option value="custom">Custom expedition</option></select></div>'''
         form_id, subject, submit = "contact-form", "Website enquiry", "Send Message →"
+        done = ("Message received", "Thanks for reaching out. We've received your message and will get back to you shortly, within two business days.")
         side = f'''<h2>Reach <em>Us</em></h2>
           <ul class="contact-list">
             <li><strong>Email</strong><a href="mailto:{EMAIL}">{EMAIL}</a></li>
@@ -887,7 +889,7 @@ def build_contact(kind="contact"):
     <section class="section section-panel" style="padding-top:3rem">
       <div class="container split" style="align-items:start">
         <div id="{form_id}">
-          {form_open(form_id + "-el", subject)}
+          {form_open(form_id + "-el", subject, *done)}
             <div class="form-row">
               <div class="field"><label for="f-name">Name <span class="req">*</span></label><input id="f-name" name="name" required autocomplete="name"></div>
               <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
