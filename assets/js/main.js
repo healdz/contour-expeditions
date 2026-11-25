@@ -92,6 +92,13 @@
         if (sel.value && !sel.disabled) fd.set(sel.name, sel.options[sel.selectedIndex].text);
       });
 
+      // Give every email its own subject (who, which trip, when, plus a short reference).
+      // Identical subjects get grouped into one conversation by Gmail and most mail apps.
+      var when = new Date().toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+      var ref = Math.random().toString(36).slice(2, 6).toUpperCase();
+      var who = [fd.get("name"), fd.get("trip")].filter(Boolean).join(" – ");
+      fd.set("_subject", fd.get("_subject") + (who ? ": " + who : "") + " (" + when + " · #" + ref + ")");
+
       // FormSubmit can take many seconds to answer, so confirm straight away. The answers stay in
       // the (hidden) form, and if the send fails the confirmation is removed and the form comes back.
       status.hidden = true;
